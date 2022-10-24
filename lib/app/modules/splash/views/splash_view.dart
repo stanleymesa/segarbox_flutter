@@ -9,10 +9,12 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+        alignment: Alignment.center,
         child: Lottie.asset(
           'assets/lottie/splash_light.json',
-          repeat: false,
+          fit: BoxFit.cover,
+          frameRate: FrameRate.max,
         ),
       ),
     );
