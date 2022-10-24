@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:segarbox_flutter/app/modules/home/bindings/home_binding.dart';
 import 'package:segarbox_flutter/app/modules/home/views/home_view.dart';
+import 'package:segarbox_flutter/app/modules/onboarding/bindings/onboarding_binding.dart';
+import 'package:segarbox_flutter/app/modules/onboarding/views/onboarding_view.dart';
 import 'package:segarbox_flutter/app/modules/splash/bindings/splash_binding.dart';
 import 'package:segarbox_flutter/app/modules/splash/views/splash_view.dart';
 
@@ -22,6 +24,11 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.ONBOARDING,
+      page: () => OnboardingView(),
+      binding: OnboardingBinding(),
     ),
   ];
 }

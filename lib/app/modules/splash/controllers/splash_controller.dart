@@ -20,7 +20,7 @@ class SplashController extends GetxController {
 
   splashScreen() async {
     Future.delayed(Duration(seconds: 3), () {
-      Get.offAllNamed(Routes.HOME);
+      Get.offAllNamed(Routes.ONBOARDING);
     });
   }
 }
