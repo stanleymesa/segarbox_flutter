@@ -1,13 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/utils/const.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  final ScrollController scrollC = ScrollController();
+  final ratio = 0.0.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
-    print('HOME INIT');
+    scrollC.addListener(() {
+      ratio.value = scrollC.offset / (headerHeight - appBarHeight);
+    });
   }
 
   @override
@@ -16,6 +20,7 @@ class HomeController extends GetxController {
   }
 
   @override
-  void onClose() {}
-  void increment() => count.value++;
+  void onClose() {
+    scrollC.dispose();
+  }
 }

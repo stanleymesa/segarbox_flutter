@@ -123,7 +123,7 @@ class OnBoardingInfo extends StatelessWidget {
               ),
               Text(
                 controller.onBoarding[index].desc,
-                style: normal,
+                style: normalDark,
                 textAlign: TextAlign.center,
               ),
               SizedBox(
