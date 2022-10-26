@@ -13,6 +13,7 @@ dependencies:
   lottie: ^1.4.3
   google_fonts: ^3.0.1
   colorful_safe_area: ^0.3.0
+  carousel_slider: ^4.1.1
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
@@ -24,6 +25,7 @@ flutter:
 
   assets:
     - assets/lottie/
+    - assets/image/
 
 
 
