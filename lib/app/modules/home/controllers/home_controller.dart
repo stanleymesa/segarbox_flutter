@@ -6,6 +6,12 @@ import 'package:segarbox_flutter/utils/const.dart';
 class HomeController extends GetxController {
   final ScrollController scrollC = ScrollController();
   final ratio = 0.0.obs;
+  final List<String> carouselImages = [
+    'assets/image/promo1.jpg',
+    'assets/image/promo2.jpg',
+    'assets/image/promo3.jpg',
+  ];
+  final carouselIndex = 0.obs;
 
   @override
   void onInit() {
