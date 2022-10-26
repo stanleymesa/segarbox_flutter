@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 
 class HomeController extends GetxController {
@@ -9,8 +10,12 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    systemBarColor(statusBarColor: green, navBarColor: defaultWhite);
     scrollC.addListener(() {
       ratio.value = scrollC.offset / (headerHeight - appBarHeight);
+      systemBarColor(
+          statusBarColor: (ratio.value <= 0.7) ? green : defaultWhite,
+          navBarColor: defaultWhite);
     });
   }
 
