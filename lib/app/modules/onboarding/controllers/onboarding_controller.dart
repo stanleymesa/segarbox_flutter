@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/data/models/onboarding.dart';
+import 'package:segarbox_flutter/theme/theme.dart';
 
 class OnboardingController extends GetxController {
   final List<OnBoarding> onBoarding = [
@@ -27,6 +28,7 @@ class OnboardingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    systemBarColor(navBarColor: defaultWhite);
   }
 
   @override

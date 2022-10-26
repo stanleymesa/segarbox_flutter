@@ -1,2 +1,2 @@
-const double headerHeight = 120;
-const double appBarHeight = 75;
+const double headerHeight = 90;
+const double appBarHeight = 85;

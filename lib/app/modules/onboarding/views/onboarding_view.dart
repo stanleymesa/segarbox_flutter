@@ -45,7 +45,7 @@ class Skip extends StatelessWidget {
         onTap: () => Get.offAllNamed(Routes.HOME),
         child: Icon(
           Icons.double_arrow_rounded,
-          color: Colors.black87,
+          color: black,
         ),
       ),
     );
@@ -77,7 +77,7 @@ class Indicator extends StatelessWidget {
                 height: 8,
                 decoration: BoxDecoration(
                     color: (index == controller.currentPage.value)
-                        ? Colors.black87
+                        ? black
                         : Colors.grey,
                     borderRadius: BorderRadius.all(Radius.circular(8))),
               ),

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -30,3 +31,17 @@ TextStyle normalBold = GoogleFonts.poppins().copyWith(
   fontStyle: FontStyle.normal,
   fontSize: 14,
 );
+
+void systemBarColor(
+    {Color statusBarColor = Colors.transparent,
+    Color navBarColor = Colors.white}) {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+        statusBarColor: statusBarColor,
+        systemNavigationBarColor: navBarColor,
+        systemNavigationBarIconBrightness:
+            (navBarColor == Colors.white || navBarColor == defaultWhite)
+                ? Brightness.dark
+                : Brightness.light),
+  );
+}
