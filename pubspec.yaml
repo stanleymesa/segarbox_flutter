@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
   lottie: ^1.4.3
   google_fonts: ^3.0.1
-  colorful_safe_area: ^0.3.0
   carousel_slider: ^4.1.1
 
 dev_dependencies: 

@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/app/modules/home/views/profile_view.dart';
+import 'package:segarbox_flutter/app/modules/home/views/transactions_view.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 
@@ -12,39 +14,226 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            NestedScrollView(
-              controller: controller.scrollC,
-              headerSliverBuilder: (context, innerBoxIsScrolled) => <Widget>[
-                Header(),
-              ],
-              body: ListView(
-                children: <Widget>[
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Carousel(controller: controller),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  CarouselIndicator(controller: controller),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Container(
-                    height: 500,
-                    color: Colors.amber,
-                  ),
-                  Container(
-                    height: 500,
-                    color: Colors.red,
-                  ),
-                ],
+        child: Obx(
+          () => <Widget>[
+            HomePage(controller: controller),
+            TransactionsPage(),
+            ProfilePage(),
+          ].elementAt(controller.currentNavPage.value),
+        ),
+      ),
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_rounded),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.library_books_rounded),
+              label: 'Transactions',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_rounded),
+              label: 'Profile',
+            ),
+          ],
+          selectedLabelStyle: normalDark.copyWith(fontSize: 12),
+          unselectedLabelStyle: normalDark.copyWith(fontSize: 12),
+          selectedItemColor: green,
+          currentIndex: controller.currentNavPage.value,
+          onTap: (index) => controller.currentNavPage.value = index,
+        ),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  final HomeController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        NestedScrollView(
+          controller: controller.scrollC,
+          headerSliverBuilder: (context, innerBoxIsScrolled) => <Widget>[
+            Header(),
+          ],
+          body: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: 24,
+              ),
+              Carousel(controller: controller),
+              SizedBox(
+                height: 16,
+              ),
+              CarouselIndicator(controller: controller),
+              SizedBox(
+                height: 24,
+              ),
+              MainChips(controller: controller),
+              SizedBox(
+                height: 16,
+              ),
+              HorizontalListView1(),
+              SizedBox(
+                height: 24,
+              ),
+              AllProductsTitle(),
+              SizedBox(
+                height: 16,
+              ),
+              GridView1(),
+              SizedBox(
+                height: 64,
+              )
+            ],
+          ),
+        ),
+        MainAppBar(controller: controller),
+      ],
+    );
+  }
+}
+
+class GridView1 extends StatelessWidget {
+  const GridView1({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: GridView.builder(
+        itemCount: 10,
+        shrinkWrap: true,
+        primary: false,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16),
+        itemBuilder: (context, index) => Container(
+          height: 200,
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
+}
+
+class AllProductsTitle extends StatelessWidget {
+  const AllProductsTitle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'All Products',
+            style: title,
+          ),
+          Row(
+            children: [
+              Text(
+                'See All',
+                style: normalBold,
+              ),
+              Icon(
+                Icons.double_arrow_rounded,
+                color: green,
+                size: 20,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HorizontalListView1 extends StatelessWidget {
+  const HorizontalListView1({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      child: ListView.separated(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) => (index != 10)
+              ? Container(
+                  width: 150,
+                  color: Colors.grey,
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'See All',
+                      style: normalBold,
+                    ),
+                    Icon(
+                      Icons.double_arrow_rounded,
+                      color: green,
+                      size: 20,
+                    )
+                  ],
+                ),
+          separatorBuilder: (context, index) => SizedBox(
+                width: 16,
+              ),
+          itemCount: 10 + 1),
+    );
+  }
+}
+
+class MainChips extends StatelessWidget {
+  const MainChips({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  final HomeController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Wrap(
+        children: List.generate(
+          controller.chips.length,
+          (index) => Obx(
+            () => Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: ChoiceChip(
+                selectedColor: green.withOpacity(0.4),
+                elevation: 2,
+                label: Text(
+                  controller.chips[index],
+                  style: normalDark.copyWith(fontSize: 12),
+                ),
+                selected: (controller.chipsIndex.value == index) ? true : false,
+                onSelected: (isSelected) {
+                  if (isSelected) controller.chipsIndex.value = index;
+                },
               ),
             ),
-            MainAppBar(controller: controller),
-          ],
+          ),
         ),
       ),
     );
@@ -72,8 +261,9 @@ class CarouselIndicator extends StatelessWidget {
             width: (controller.carouselIndex.value == index) ? 32 : 8,
             height: 8,
             decoration: BoxDecoration(
-              color:
-                  (controller.carouselIndex.value == index) ? green : softGreen,
+              color: (controller.carouselIndex.value == index)
+                  ? green
+                  : green.withOpacity(0.4),
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
           ),

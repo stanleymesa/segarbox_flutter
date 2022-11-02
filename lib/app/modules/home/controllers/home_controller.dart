@@ -4,14 +4,24 @@ import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 
 class HomeController extends GetxController {
+  // Fading AppBar
   final ScrollController scrollC = ScrollController();
   final ratio = 0.0.obs;
+
+  // Carousel
   final List<String> carouselImages = [
     'assets/image/promo1.jpg',
     'assets/image/promo2.jpg',
     'assets/image/promo3.jpg',
   ];
   final carouselIndex = 0.obs;
+
+  // Chips
+  final List<String> chips = ['Most Popular', 'Vegetables', 'Fruits'];
+  final chipsIndex = 0.obs;
+
+  // Navigation Bar
+  final currentNavPage = 0.obs;
 
   @override
   void onInit() {
