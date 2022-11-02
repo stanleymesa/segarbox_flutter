@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
 Color green = Color(0XFF02B80E);
-Color softGreen = Color.fromARGB(255, 130, 240, 138);
 Color defaultWhite = Color(0XFFFAFAFA);
 Color black = Colors.black87;
 
