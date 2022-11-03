@@ -85,7 +85,7 @@ class HomePage extends StatelessWidget {
               ),
               HorizontalListView1(),
               SizedBox(
-                height: 24,
+                height: 16,
               ),
               AllProductsTitle(),
               SizedBox(
@@ -118,9 +118,12 @@ class GridView1 extends StatelessWidget {
         shrinkWrap: true,
         primary: false,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16),
+          crossAxisCount: 2,
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 16,
+          childAspectRatio: 0.65,
+        ),
         itemBuilder: (context, index) => Container(
-          height: 200,
           color: Colors.grey,
         ),
       ),
@@ -171,15 +174,69 @@ class HorizontalListView1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 275,
       child: ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => (index != 10)
-              ? Container(
-                  width: 150,
-                  color: Colors.grey,
-                )
+              ? Card(
+                  color: Colors.white,
+                  elevation: 8,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: SizedBox(
+                    width: 150,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          child: Image.asset(
+                            'assets/image/veggie.jpg',
+                            width: 150,
+                            height: 125,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'Broccoli Super Extra Umami Damn So Much',
+                            style: normalBold,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            '500 g',
+                            style: normalDark,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'Rp 20.000',
+                            style: normalBold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ))
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
