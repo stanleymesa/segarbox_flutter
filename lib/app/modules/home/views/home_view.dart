@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/views/profile_view.dart';
@@ -91,7 +92,9 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              GridView1(),
+              GridView1(
+                controller: controller,
+              ),
               SizedBox(
                 height: 64,
               )
@@ -105,27 +108,79 @@ class HomePage extends StatelessWidget {
 }
 
 class GridView1 extends StatelessWidget {
-  const GridView1({
-    Key? key,
-  }) : super(key: key);
+  const GridView1({Key? key, required this.controller}) : super(key: key);
+
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: GridView.builder(
+      child: MasonryGridView.builder(
         itemCount: 10,
         shrinkWrap: true,
         primary: false,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+        gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          childAspectRatio: 0.65,
         ),
-        itemBuilder: (context, index) => Container(
-          color: Colors.grey,
-        ),
+        itemBuilder: (context, index) => Card(
+            color: Colors.white,
+            elevation: 8,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            child: Container(
+              padding: EdgeInsets.only(bottom: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),
+                    child: Image.asset(
+                      'assets/image/veggie.jpg',
+                      width: 150,
+                      height: 125,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      controller.listTitle[index],
+                      style: normalBold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      '500 g',
+                      style: normalDark,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      'Rp 20.000',
+                      style: normalBold,
+                    ),
+                  ),
+                ],
+              ),
+            )),
       ),
     );
   }
@@ -236,7 +291,8 @@ class HorizontalListView1 extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ))
+                  ),
+                )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

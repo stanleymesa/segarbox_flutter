@@ -23,6 +23,20 @@ class HomeController extends GetxController {
   // Navigation Bar
   final currentNavPage = 0.obs;
 
+  // Grid
+  final List<String> listTitle = [
+    'Broccoli Super Duper Umami Taste',
+    'Broccoli Super Duper Umami Taste asdasdasfasdfsad',
+    'Broccoli Super Dupe',
+    'Broccoli',
+    'Broccoli Super Duper Umami',
+    'Broccoli Super Duper Umami Taste sadasdsad',
+    'Broccoli Super',
+    'Broccoli Su',
+    'Broccoli Super Duper Umami Taste Wow oMAASDAJN asdjn',
+    'Broccoli Super Duper Umam',
+  ];
+
   @override
   void onInit() {
     super.onInit();
