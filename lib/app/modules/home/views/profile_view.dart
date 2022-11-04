@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/profile_controller.dart';
+import 'package:segarbox_flutter/theme/theme.dart';
 
 class ProfilePage extends GetView<ProfileController> {
   const ProfilePage({
@@ -18,7 +19,20 @@ class ProfilePage extends GetView<ProfileController> {
         homeController.currentNavPage.value = 0;
         return false;
       },
-      child: Text('Profile'),
+      child: Container(
+        color: green,
+        width: Get.width,
+        height: Get.height,
+        child: Column(
+          children: [
+            Container(
+              color: Colors.amber,
+              height: 100,
+              width: 100,
+            )
+          ],
+        ),
+      ),
     );
   }
 }
