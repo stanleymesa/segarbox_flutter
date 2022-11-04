@@ -69,16 +69,115 @@ class TransactionsPage extends GetView<TransactionsController> {
               child: TabBarView(
                 children: [
                   ListView.separated(
-                    itemBuilder: (context, index) => Container(
-                      color: Colors.grey,
-                      height: 100,
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Card(
+                                elevation: 4,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  child: Image.asset(
+                                    'assets/image/veggie.jpg',
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Broccoli',
+                                    style: normalBold,
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    '18 Jun 2022',
+                                    style: normalDark,
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    '2 Items',
+                                    style: normalDark,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Divider(
+                            thickness: 1,
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            '+ 2 more products',
+                            style: normalDark,
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Grand Total',
+                                    style: normalDark,
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    'Rp 120.000',
+                                    style: normalBold,
+                                  ),
+                                ],
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: Text('Check Status'),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: green,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)))),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 16,
+                    separatorBuilder: (context, index) => Divider(
+                      thickness: 4,
                     ),
                     itemCount: 10,
                   ),
                   ListView.separated(
+                    padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
                     itemBuilder: (context, index) => Container(
                       color: Colors.amber,
                       height: 100,
