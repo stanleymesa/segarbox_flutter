@@ -40,7 +40,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    systemBarColor(statusBarColor: green, navBarColor: defaultWhite);
     scrollC.addListener(() {
       ratio.value = scrollC.offset / (headerHeight - appBarHeight);
       systemBarColor(
