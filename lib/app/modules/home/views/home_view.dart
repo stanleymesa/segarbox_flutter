@@ -18,8 +18,8 @@ class HomeView extends GetView<HomeController> {
         child: Obx(
           () => <Widget>[
             HomePage(controller: controller),
-            TransactionsPage(),
-            ProfilePage(),
+            TransactionsPage(homeController: controller),
+            ProfilePage(homeController: controller),
           ].elementAt(controller.currentNavPage.value),
         ),
       ),
@@ -58,8 +58,19 @@ class HomePage extends StatelessWidget {
 
   final HomeController controller;
 
+  void resetHomeAppBar() {
+    controller.ratio.value = 0;
+    systemBarColor(
+        statusBarColor: (controller.ratio.value <= 0.7) ? green : defaultWhite,
+        navBarColor: defaultWhite);
+  }
+
   @override
   Widget build(BuildContext context) {
+    controller.ratio.value = 0;
+    systemBarColor(
+        statusBarColor: (controller.ratio.value <= 0.7) ? green : defaultWhite,
+        navBarColor: defaultWhite);
     return Stack(
       children: [
         NestedScrollView(
@@ -440,28 +451,28 @@ class MainAppBar extends StatelessWidget {
                 Expanded(
                   child: TextField(
                     cursorColor:
-                        (controller.ratio.value <= 0.5) ? defaultWhite : black,
+                        (controller.ratio.value <= 0.5) ? defaultWhite : green,
                     style: (controller.ratio.value <= 0.5)
                         ? normalLight
-                        : normalDark,
+                        : normalDark.copyWith(color: green),
                     decoration: InputDecoration(
                       hintText: 'Search',
                       hintStyle: (controller.ratio.value <= 0.5)
                           ? normalLight
-                          : normalDark,
+                          : normalDark.copyWith(color: green),
                       prefixIcon: Icon(
                         Icons.search,
                         size: 18,
                         color: (controller.ratio.value <= 0.5)
                             ? defaultWhite
-                            : black,
+                            : green,
                       ),
                       contentPadding: EdgeInsets.symmetric(horizontal: 0),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color: (controller.ratio.value <= 0.5)
                                 ? defaultWhite
-                                : black),
+                                : green),
                         borderRadius: BorderRadius.all(
                           Radius.circular(8),
                         ),
@@ -470,7 +481,7 @@ class MainAppBar extends StatelessWidget {
                         borderSide: BorderSide(
                             color: (controller.ratio.value <= 0.5)
                                 ? defaultWhite
-                                : black),
+                                : green),
                         borderRadius: BorderRadius.all(
                           Radius.circular(8),
                         ),
@@ -483,7 +494,7 @@ class MainAppBar extends StatelessWidget {
                 ),
                 Icon(
                   Icons.shopping_cart_rounded,
-                  color: (controller.ratio.value <= 0.5) ? defaultWhite : black,
+                  color: (controller.ratio.value <= 0.5) ? defaultWhite : green,
                 )
               ],
             ),
