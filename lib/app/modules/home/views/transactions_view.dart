@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/transactions_controller.dart';
-import 'package:segarbox_flutter/app/modules/home/views/home_view.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
-import 'package:segarbox_flutter/utils/const.dart';
 
 class TransactionsPage extends GetView<TransactionsController> {
   const TransactionsPage({

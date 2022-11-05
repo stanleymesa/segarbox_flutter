@@ -67,10 +67,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    controller.ratio.value = 0;
-    systemBarColor(
-        statusBarColor: (controller.ratio.value <= 0.7) ? green : defaultWhite,
-        navBarColor: defaultWhite);
+    resetHomeAppBar();
     return Stack(
       children: [
         NestedScrollView(

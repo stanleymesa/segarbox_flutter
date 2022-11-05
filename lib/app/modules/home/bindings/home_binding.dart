@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/app/modules/home/controllers/profile_controller.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/transactions_controller.dart';
 
 import '../controllers/home_controller.dart';
@@ -11,6 +12,9 @@ class HomeBinding extends Bindings {
     );
     Get.lazyPut<TransactionsController>(
       () => TransactionsController(),
+    );
+    Get.lazyPut<ProfileController>(
+      () => ProfileController(),
     );
   }
 }
