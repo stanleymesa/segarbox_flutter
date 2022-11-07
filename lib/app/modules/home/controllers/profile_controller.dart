@@ -16,6 +16,9 @@ class ProfileController extends GetxController {
   final ScrollController scrollC = ScrollController();
   final scrollOffset = 0.0.obs;
 
+  // Switch Dark Mode
+  final isDarkMode = false.obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
