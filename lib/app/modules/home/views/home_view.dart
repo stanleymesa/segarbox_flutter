@@ -133,62 +133,77 @@ class GridView1 extends StatelessWidget {
         gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
         ),
-        itemBuilder: (context, index) => Card(
-            color: Colors.white,
-            elevation: 8,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Container(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                    child: Image.asset(
-                      'assets/image/veggie.jpg',
-                      width: 150,
-                      height: 125,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      controller.listTitle[index],
-                      style: normalBold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      '500 g',
-                      style: normalDark,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'Rp 20.000',
-                      style: normalBold,
-                    ),
-                  ),
-                ],
+        itemBuilder: (context, index) => Stack(
+          children: [
+            Card(
+              color: Colors.white,
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-            )),
+              child: Container(
+                padding: EdgeInsets.only(bottom: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                      child: Image.asset(
+                        'assets/image/veggie.jpg',
+                        width: 150,
+                        height: 125,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        controller.listTitle[index],
+                        style: normalBold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        '500 g',
+                        style: normalDark,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Rp 20.000',
+                        style: normalBold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  splashColor: green.withOpacity(0.2),
+                  onTap: () => print('tapped'),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -242,64 +257,81 @@ class HorizontalListView1 extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => (index != 10)
-              ? Card(
-                  color: Colors.white,
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: SizedBox(
-                    width: 150,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                          ),
-                          child: Image.asset(
-                            'assets/image/veggie.jpg',
-                            width: 150,
-                            height: 125,
-                            fit: BoxFit.fill,
-                          ),
+              ? Stack(
+                  children: [
+                    Card(
+                      color: Colors.white,
+                      elevation: 8,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: SizedBox(
+                        width: 150,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
+                              child: Image.asset(
+                                'assets/image/veggie.jpg',
+                                width: 150,
+                                height: 125,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text(
+                                'Broccoli Super Extra Umami Damn So Much',
+                                style: normalBold,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text(
+                                '500 g',
+                                style: normalDark,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text(
+                                'Rp 20.000',
+                                style: normalBold,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            'Broccoli Super Extra Umami Damn So Much',
-                            style: normalBold,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            '500 g',
-                            style: normalDark,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            'Rp 20.000',
-                            style: normalBold,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          splashColor: green.withOpacity(0.2),
+                          onTap: () => print('tapped'),
+                        ),
+                      ),
+                    )
+                  ],
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
