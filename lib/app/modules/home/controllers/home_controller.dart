@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/app/data/models/user.dart';
+import 'package:segarbox_flutter/app/modules/home/providers/home_provider.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with WidgetsBindingObserver {
   // Fading AppBar
   final ScrollController scrollC = ScrollController();
   final ratio = 0.0.obs;
+  void setSystemBar() {
+    systemBarColor(
+        statusBarColor: (ratio.value <= 0.7) ? green : defaultWhite,
+        navBarColor: defaultWhite);
+  }
 
   // Carousel
   final List<String> carouselImages = [
@@ -37,15 +44,38 @@ class HomeController extends GetxController {
     'Broccoli Super Duper Umam',
   ];
 
+  // User
+  final HomeProvider homeProvider = HomeProvider();
+  final user = User().obs;
+  final isUserLoading = true.obs;
+  final isUserError = {
+    'isError': false,
+    'error': '',
+  }.obs;
+
   @override
   void onInit() {
     super.onInit();
     scrollC.addListener(() {
       ratio.value = scrollC.offset / (headerHeight - appBarHeight);
-      systemBarColor(
-          statusBarColor: (ratio.value <= 0.7) ? green : defaultWhite,
-          navBarColor: defaultWhite);
+      setSystemBar();
     });
+
+    isUserLoading.value = true;
+    homeProvider.fetchUsers().then(
+      (value) {
+        user.value = value;
+        isUserLoading.value = false;
+      },
+      onError: (error) {
+        print(error.toString());
+        isUserLoading.value = false;
+        isUserError.value = {
+          'isError': true,
+          'error': error.toString(),
+        };
+      },
+    );
   }
 
   @override
@@ -56,5 +86,26 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     scrollC.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        print('STATE: ${state}');
+        break;
+      case AppLifecycleState.inactive:
+        print('STATE: ${state}');
+
+        break;
+      case AppLifecycleState.paused:
+        print('STATE: ${state}');
+
+        break;
+      case AppLifecycleState.detached:
+        print('STATE: ${state}');
+
+        break;
+    }
   }
 }

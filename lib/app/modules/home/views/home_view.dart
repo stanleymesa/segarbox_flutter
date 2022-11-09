@@ -5,6 +5,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/views/profile_view.dart';
 import 'package:segarbox_flutter/app/modules/home/views/transactions_view.dart';
+import 'package:segarbox_flutter/app/routes/app_pages.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 
@@ -92,7 +93,7 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              HorizontalListView1(),
+              HorizontalListView1(controller: controller),
               SizedBox(
                 height: 16,
               ),
@@ -193,12 +194,14 @@ class GridView1 extends StatelessWidget {
               ),
             ),
             Positioned.fill(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  splashColor: green.withOpacity(0.2),
-                  onTap: () => print('tapped'),
+              child: SizedBox(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    splashColor: green.withOpacity(0.2),
+                    onTap: () => Get.toNamed(Routes.DETAIL),
+                  ),
                 ),
               ),
             )
@@ -246,111 +249,122 @@ class AllProductsTitle extends StatelessWidget {
 
 class HorizontalListView1 extends StatelessWidget {
   const HorizontalListView1({
+    required this.controller,
     Key? key,
   }) : super(key: key);
+
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 275,
-      child: ListView.separated(
-          padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => (index != 10)
-              ? Stack(
-                  children: [
-                    Card(
-                      color: Colors.white,
-                      elevation: 8,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+      child: Obx(
+        () => (controller.isUserLoading.value)
+            ? Text('LOADING')
+            : ListView.separated(
+                padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => (index !=
+                        controller.user.value.data!.length)
+                    ? Stack(
+                        children: [
+                          Card(
+                            color: Colors.white,
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: SizedBox(
+                              width: 150,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                    child: Image.network(
+                                      controller.user.value.data![index].avatar
+                                          .toString(),
+                                      width: 150,
+                                      height: 125,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Text(
+                                      '${controller.user.value.data![index].firstName} ${controller.user.value.data![index].lastName}',
+                                      style: normalBold,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Text(
+                                      '500 g',
+                                      style: normalDark,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Text(
+                                      'Rp 20.000',
+                                      style: normalBold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                splashColor: green.withOpacity(0.2),
+                                onTap: () => Get.toNamed(Routes.DETAIL),
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'See All',
+                            style: normalBold,
+                          ),
+                          Icon(
+                            Icons.double_arrow_rounded,
+                            color: green,
+                            size: 20,
+                          )
+                        ],
                       ),
-                      child: SizedBox(
-                        width: 150,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              child: Image.asset(
-                                'assets/image/veggie.jpg',
-                                width: 150,
-                                height: 125,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                'Broccoli Super Extra Umami Damn So Much',
-                                style: normalBold,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                '500 g',
-                                style: normalDark,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                'Rp 20.000',
-                                style: normalBold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                separatorBuilder: (context, index) => SizedBox(
+                      width: 16,
                     ),
-                    Positioned.fill(
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          splashColor: green.withOpacity(0.2),
-                          onTap: () => print('tapped'),
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'See All',
-                      style: normalBold,
-                    ),
-                    Icon(
-                      Icons.double_arrow_rounded,
-                      color: green,
-                      size: 20,
-                    )
-                  ],
-                ),
-          separatorBuilder: (context, index) => SizedBox(
-                width: 16,
-              ),
-          itemCount: 10 + 1),
+                itemCount: controller.user.value.data!.length + 1),
+      ),
     );
   }
 }
