@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:segarbox_flutter/app/modules/cart/bindings/cart_binding.dart';
+import 'package:segarbox_flutter/app/modules/cart/views/cart_view.dart';
 import 'package:segarbox_flutter/app/modules/detail/bindings/detail_binding.dart';
 import 'package:segarbox_flutter/app/modules/detail/views/detail_view.dart';
 import 'package:segarbox_flutter/app/modules/home/bindings/home_binding.dart';
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.DETAIL,
       page: () => DetailView(),
       binding: DetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.CART,
+      page: () => CartView(),
+      binding: CartBinding(),
     ),
   ];
 }

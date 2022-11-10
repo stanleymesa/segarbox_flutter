@@ -535,9 +535,13 @@ class MainAppBar extends StatelessWidget {
                 SizedBox(
                   width: 16,
                 ),
-                Icon(
-                  Icons.shopping_cart_rounded,
-                  color: (controller.ratio.value <= 0.5) ? defaultWhite : green,
+                GestureDetector(
+                  child: Icon(
+                    Icons.shopping_cart_rounded,
+                    color:
+                        (controller.ratio.value <= 0.5) ? defaultWhite : green,
+                  ),
+                  onTap: () => Get.toNamed(Routes.CART),
                 )
               ],
             ),

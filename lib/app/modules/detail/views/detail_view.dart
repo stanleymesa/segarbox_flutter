@@ -4,6 +4,7 @@ import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
+import 'package:segarbox_flutter/app/routes/app_pages.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 import '../controllers/detail_controller.dart';
@@ -13,7 +14,7 @@ class DetailView extends GetView<DetailController> {
 
   @override
   Widget build(BuildContext context) {
-    systemBarColor(statusBarColor: defaultWhite);
+    systemBarColor(statusBarColor: defaultWhite, navBarColor: defaultWhite);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: defaultWhite,
@@ -27,9 +28,12 @@ class DetailView extends GetView<DetailController> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 24),
-            child: Icon(
-              Icons.shopping_cart_rounded,
-              color: green,
+            child: GestureDetector(
+              child: Icon(
+                Icons.shopping_cart_rounded,
+                color: green,
+              ),
+              onTap: () => Get.toNamed(Routes.CART),
             ),
           ),
         ],
