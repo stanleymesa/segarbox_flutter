@@ -200,7 +200,8 @@ class GridView1 extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     splashColor: green.withOpacity(0.2),
-                    onTap: () => Get.toNamed(Routes.DETAIL),
+                    onTap: () => Get.toNamed(Routes.DETAIL)!
+                        .then((value) async => controller.setSystemBar()),
                   ),
                 ),
               ),
@@ -340,7 +341,8 @@ class HorizontalListView1 extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
                                 splashColor: green.withOpacity(0.2),
-                                onTap: () => Get.toNamed(Routes.DETAIL),
+                                onTap: () => Get.toNamed(Routes.DETAIL)!
+                                    .then((value) => controller.setSystemBar()),
                               ),
                             ),
                           )
@@ -541,7 +543,8 @@ class MainAppBar extends StatelessWidget {
                     color:
                         (controller.ratio.value <= 0.5) ? defaultWhite : green,
                   ),
-                  onTap: () => Get.toNamed(Routes.CART),
+                  onTap: () => Get.toNamed(Routes.CART)!
+                      .then((value) => controller.setSystemBar()),
                 )
               ],
             ),
