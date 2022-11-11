@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/app/routes/app_pages.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 import '../controllers/checkout_controller.dart';
@@ -49,7 +50,9 @@ class CheckoutView extends GetView<CheckoutController> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.ADDRESS);
+                  },
                   child: Text(
                     'Choose Address',
                     style: normalBold.copyWith(color: defaultWhite),
