@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:segarbox_flutter/app/modules/cart/bindings/cart_binding.dart';
 import 'package:segarbox_flutter/app/modules/cart/views/cart_view.dart';
+import 'package:segarbox_flutter/app/modules/checkout/bindings/checkout_binding.dart';
+import 'package:segarbox_flutter/app/modules/checkout/views/checkout_view.dart';
 import 'package:segarbox_flutter/app/modules/detail/bindings/detail_binding.dart';
 import 'package:segarbox_flutter/app/modules/detail/views/detail_view.dart';
 import 'package:segarbox_flutter/app/modules/home/bindings/home_binding.dart';
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.CART,
       page: () => CartView(),
       binding: CartBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHECKOUT,
+      page: () => CheckoutView(),
+      binding: CheckoutBinding(),
     ),
   ];
 }

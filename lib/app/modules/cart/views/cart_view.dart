@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
+import 'package:segarbox_flutter/app/routes/app_pages.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 import '../controllers/cart_controller.dart';
@@ -77,29 +78,31 @@ class CartView extends GetView<CartController> {
                       SizedBox(
                         width: 16,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Broccoli',
-                            style: normalDark.copyWith(
-                                fontWeight: FontWeight.normal),
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Text(
-                            '1000 g',
-                            style: smallDark,
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            'Rp 20.000',
-                            style: normalBold,
-                          ),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Broccoli',
+                              style: normalDark.copyWith(
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              '1000 g',
+                              style: smallDark,
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Text(
+                              'Rp 20.000',
+                              style: normalBold,
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -162,7 +165,16 @@ class CartView extends GetView<CartController> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               width: Get.width,
-              color: defaultWhite,
+              decoration: BoxDecoration(
+                color: defaultWhite,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 4,
+                    offset: Offset(0, -1),
+                  )
+                ],
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -180,7 +192,9 @@ class CartView extends GetView<CartController> {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.CHECKOUT);
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: green,
                         shape: RoundedRectangleBorder(
@@ -188,7 +202,7 @@ class CartView extends GetView<CartController> {
                                 BorderRadius.all(Radius.circular(8)))),
                     child: Text(
                       'Checkout',
-                      style: title.copyWith(color: defaultWhite),
+                      style: normalBold.copyWith(color: defaultWhite),
                     ),
                   )
                 ],
