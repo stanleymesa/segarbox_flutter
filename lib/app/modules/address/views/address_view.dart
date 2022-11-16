@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/app/routes/app_pages.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 import '../controllers/address_controller.dart';
@@ -28,7 +29,9 @@ class AddressView extends GetView<AddressController> {
               padding: EdgeInsets.symmetric(horizontal: 24),
               width: Get.width,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(Routes.MAPS);
+                },
                 child: Text(
                   'Add Address',
                   style: normalBold.copyWith(color: defaultWhite),
