@@ -10,6 +10,8 @@ import 'package:segarbox_flutter/app/modules/detail/bindings/detail_binding.dart
 import 'package:segarbox_flutter/app/modules/detail/views/detail_view.dart';
 import 'package:segarbox_flutter/app/modules/home/bindings/home_binding.dart';
 import 'package:segarbox_flutter/app/modules/home/views/home_view.dart';
+import 'package:segarbox_flutter/app/modules/maps/bindings/maps_binding.dart';
+import 'package:segarbox_flutter/app/modules/maps/views/maps_view.dart';
 import 'package:segarbox_flutter/app/modules/onboarding/bindings/onboarding_binding.dart';
 import 'package:segarbox_flutter/app/modules/onboarding/views/onboarding_view.dart';
 import 'package:segarbox_flutter/app/modules/splash/bindings/splash_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.ADDRESS,
       page: () => AddressView(),
       binding: AddressBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAPS,
+      page: () => MapsView(),
+      binding: MapsBinding(),
     ),
   ];
 }
