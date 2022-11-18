@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,11 +17,12 @@ class MapsController extends GetxController {
   ].obs;
 
   final currentLatLng = LatLng(-6.9896536, 110.4225974).obs;
+  final currentPlacemark = Placemark().obs;
+  final isWindowClosed = true.obs;
 
   Future<void> getCurrentPosition() async {
     if (await Permission.location.serviceStatus.isDisabled) {
       Get.snackbar('Location Services', 'Location services are disabled');
-      print('ERROR 1');
       return;
     } else {
       PermissionStatus status = await Permission.location.status;
@@ -41,37 +43,38 @@ class MapsController extends GetxController {
 
       Position position = await Geolocator.getCurrentPosition();
       currentLatLng.value = LatLng(position.latitude, position.longitude);
-
-      GoogleMapController mapController = await completer.future;
-      final oldMarkerIndex =
-          this.markers.indexWhere((marker) => marker.markerId == MarkerId('1'));
-      if (oldMarkerIndex >= 0) {
-        this.markers[oldMarkerIndex] = Marker(
-            markerId: MarkerId('1'),
-            position: LatLng(
-                currentLatLng.value.latitude, currentLatLng.value.longitude));
-      }
-      mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: currentLatLng.value,
-        zoom: 15,
-      )));
+      goTo(currentLatLng.value);
     }
   }
 
-  // Future<void> goTo(LatLng latLng) async {
-  //   GoogleMapController mapController = await completer.future;
-  //   final oldMarkerIndex =
-  //       this.markers.indexWhere((marker) => marker.markerId == MarkerId('1'));
-  //   if (oldMarkerIndex >= 0) {
-  //     this.markers[oldMarkerIndex] = Marker(
-  //         markerId: MarkerId('1'),
-  //         position: LatLng(latLng.latitude, latLng.longitude));
-  //   }
-  //   mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-  //     target: latLng,
-  //     zoom: 15,
-  //   )));
-  // }
+  Future<void> goTo(LatLng latLng) async {
+    isWindowClosed.value = false;
+
+    GoogleMapController mapController = await completer.future;
+    final oldMarkerIndex =
+        this.markers.indexWhere((marker) => marker.markerId == MarkerId('1'));
+    if (oldMarkerIndex >= 0) {
+      this.markers[oldMarkerIndex] = Marker(
+        markerId: MarkerId('1'),
+        position: LatLng(latLng.latitude, latLng.longitude),
+      );
+    }
+    mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: latLng,
+      zoom: 15,
+    )));
+
+    var placemark =
+        await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+    currentPlacemark.value = placemark.firstWhere((element) =>
+        element.street != null &&
+        element.locality != null &&
+        element.subAdministrativeArea != null &&
+        element.administrativeArea != null &&
+        element.postalCode != null &&
+        element.country != null);
+    print(currentPlacemark.value.toString());
+  }
 
   @override
   void onInit() {
