@@ -53,7 +53,16 @@ class MapsView extends GetView<MapsController> {
                 vertical: 16,
               ),
               width: Get.width,
-              color: defaultWhite,
+              decoration: BoxDecoration(
+                color: defaultWhite,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 12,
+                    offset: Offset(0, -1),
+                  )
+                ],
+              ),
               child: ElevatedButton(
                 onPressed: () {
                   Get.back();
