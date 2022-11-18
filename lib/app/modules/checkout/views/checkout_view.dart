@@ -83,7 +83,7 @@ class CheckoutView extends GetView<CheckoutController> {
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 primary: false,
                 shrinkWrap: true,
-                itemCount: 5,
+                itemCount: 3,
                 separatorBuilder: (context, index) => Column(
                   children: [
                     SizedBox(
@@ -334,7 +334,7 @@ class CheckoutView extends GetView<CheckoutController> {
                 ),
               ),
               SizedBox(
-                height: 96,
+                height: 120,
               ),
             ],
           ),
@@ -348,7 +348,7 @@ class CheckoutView extends GetView<CheckoutController> {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
-                    blurRadius: 4,
+                    blurRadius: 12,
                     offset: Offset(0, -1),
                   )
                 ],
@@ -370,7 +370,9 @@ class CheckoutView extends GetView<CheckoutController> {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.INVOICE);
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: green,
                         shape: RoundedRectangleBorder(

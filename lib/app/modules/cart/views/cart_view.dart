@@ -170,7 +170,7 @@ class CartView extends GetView<CartController> {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
-                    blurRadius: 4,
+                    blurRadius: 12,
                     offset: Offset(0, -1),
                   )
                 ],
