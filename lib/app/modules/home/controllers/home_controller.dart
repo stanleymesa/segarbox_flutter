@@ -15,6 +15,13 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         navBarColor: defaultWhite);
   }
 
+  void resetHomeAppBar() {
+    ratio.value = 0;
+    systemBarColor(
+        statusBarColor: (ratio.value <= 0.7) ? green : defaultWhite,
+        navBarColor: defaultWhite);
+  }
+
   // Carousel
   final List<String> carouselImages = [
     'assets/image/promo1.jpg',

@@ -16,6 +16,8 @@ import 'package:segarbox_flutter/app/modules/maps/bindings/maps_binding.dart';
 import 'package:segarbox_flutter/app/modules/maps/views/maps_view.dart';
 import 'package:segarbox_flutter/app/modules/onboarding/bindings/onboarding_binding.dart';
 import 'package:segarbox_flutter/app/modules/onboarding/views/onboarding_view.dart';
+import 'package:segarbox_flutter/app/modules/rating/bindings/rating_binding.dart';
+import 'package:segarbox_flutter/app/modules/rating/views/rating_view.dart';
 import 'package:segarbox_flutter/app/modules/splash/bindings/splash_binding.dart';
 import 'package:segarbox_flutter/app/modules/splash/views/splash_view.dart';
 
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.INVOICE,
       page: () => InvoiceView(),
       binding: InvoiceBinding(),
+    ),
+    GetPage(
+      name: _Paths.RATING,
+      page: () => RatingView(),
+      binding: RatingBinding(),
     ),
   ];
 }
