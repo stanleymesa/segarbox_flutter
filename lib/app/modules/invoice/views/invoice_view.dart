@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 import '../controllers/invoice_controller.dart';
 
 class InvoiceView extends GetView<InvoiceController> {
+  final homeController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,7 +203,10 @@ class InvoiceView extends GetView<InvoiceController> {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.popUntil(
+                          context, ModalRoute.withName(Routes.HOME));
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: green,
                         shape: RoundedRectangleBorder(

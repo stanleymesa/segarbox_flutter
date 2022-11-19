@@ -13,6 +13,7 @@ abstract class Routes {
   static const ADDRESS = _Paths.ADDRESS;
   static const MAPS = _Paths.MAPS;
   static const INVOICE = _Paths.INVOICE;
+  static const RATING = _Paths.RATING;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const ADDRESS = '/address';
   static const MAPS = '/maps';
   static const INVOICE = '/invoice';
+  static const RATING = '/rating';
 }

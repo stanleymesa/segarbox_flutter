@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/profile_controller.dart';
+import 'package:segarbox_flutter/app/routes/app_pages.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 
@@ -123,27 +124,40 @@ class ProfilePage extends GetView<ProfileController> {
                         thickness: 2,
                       ),
                     ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Rating',
-                            style: normalBold,
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: green,
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () => Get.toNamed(Routes.RATING)!
+                          .then((_) async => setStatusBarColor()),
+                      child: Container(
+                        color: defaultWhite,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 24),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Rating',
+                                    style: normalBold,
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    color: green,
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 16,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),

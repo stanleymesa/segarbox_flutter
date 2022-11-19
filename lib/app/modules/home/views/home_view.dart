@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    resetHomeAppBar();
+    controller.resetHomeAppBar();
     return Stack(
       children: [
         NestedScrollView(
@@ -201,7 +201,7 @@ class GridView1 extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     splashColor: green.withOpacity(0.2),
                     onTap: () => Get.toNamed(Routes.DETAIL)!
-                        .then((value) async => controller.setSystemBar()),
+                        .then((_) async => controller.setSystemBar()),
                   ),
                 ),
               ),
