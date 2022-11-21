@@ -8,6 +8,7 @@ import 'package:segarbox_flutter/app/modules/home/views/transactions_view.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -262,7 +263,28 @@ class HorizontalListView1 extends StatelessWidget {
       height: 275,
       child: Obx(
         () => (controller.isUserLoading.value)
-            ? Text('LOADING')
+            ? Shimmer.fromColors(
+                baseColor: Colors.black12,
+                highlightColor: defaultWhite,
+                child: ListView.separated(
+                  padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => Card(
+                    color: defaultWhite,
+                    elevation: 8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: SizedBox(
+                      width: 150,
+                    ),
+                  ),
+                  separatorBuilder: (context, index) => SizedBox(
+                    width: 16,
+                  ),
+                  itemCount: 5,
+                ),
+              )
             : ListView.separated(
                 padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
                 scrollDirection: Axis.horizontal,
@@ -485,70 +507,70 @@ class MainAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Container(
-          height: appBarHeight,
-          width: Get.width,
-          color: defaultWhite.withOpacity(
-              (controller.ratio.value <= 1.0) ? controller.ratio.value : 1.0),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    cursorColor:
-                        (controller.ratio.value <= 0.5) ? defaultWhite : green,
-                    style: (controller.ratio.value <= 0.5)
+        height: appBarHeight,
+        width: Get.width,
+        color: defaultWhite.withOpacity(
+            (controller.ratio.value <= 1.0) ? controller.ratio.value : 1.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  cursorColor:
+                      (controller.ratio.value <= 0.5) ? defaultWhite : green,
+                  style: (controller.ratio.value <= 0.5)
+                      ? normalLight
+                      : normalDark.copyWith(color: green),
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    hintStyle: (controller.ratio.value <= 0.5)
                         ? normalLight
                         : normalDark.copyWith(color: green),
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      hintStyle: (controller.ratio.value <= 0.5)
-                          ? normalLight
-                          : normalDark.copyWith(color: green),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        size: 18,
-                        color: (controller.ratio.value <= 0.5)
-                            ? defaultWhite
-                            : green,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: 18,
+                      color: (controller.ratio.value <= 0.5)
+                          ? defaultWhite
+                          : green,
+                    ),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: (controller.ratio.value <= 0.5)
+                              ? defaultWhite
+                              : green),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
                       ),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: (controller.ratio.value <= 0.5)
-                                ? defaultWhite
-                                : green),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: (controller.ratio.value <= 0.5)
-                                ? defaultWhite
-                                : green),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8),
-                        ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: (controller.ratio.value <= 0.5)
+                              ? defaultWhite
+                              : green),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 16,
+              ),
+              SizedBox(
+                width: 16,
+              ),
+              GestureDetector(
+                child: Icon(
+                  Icons.shopping_cart_rounded,
+                  color: (controller.ratio.value <= 0.5) ? defaultWhite : green,
                 ),
-                GestureDetector(
-                  child: Icon(
-                    Icons.shopping_cart_rounded,
-                    color:
-                        (controller.ratio.value <= 0.5) ? defaultWhite : green,
-                  ),
-                  onTap: () => Get.toNamed(Routes.CART)!
-                      .then((value) => controller.setSystemBar()),
-                )
-              ],
-            ),
-          )),
+                onTap: () => Get.toNamed(Routes.CART)!
+                    .then((value) => controller.setSystemBar()),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
