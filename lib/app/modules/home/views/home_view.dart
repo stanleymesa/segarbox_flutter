@@ -98,7 +98,7 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              AllProductsTitle(),
+              AllProductsTitle(controller: controller),
               SizedBox(
                 height: 16,
               ),
@@ -217,7 +217,10 @@ class GridView1 extends StatelessWidget {
 class AllProductsTitle extends StatelessWidget {
   const AllProductsTitle({
     Key? key,
+    required this.controller,
   }) : super(key: key);
+
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -230,18 +233,22 @@ class AllProductsTitle extends StatelessWidget {
             'All Products',
             style: title,
           ),
-          Row(
-            children: [
-              Text(
-                'See All',
-                style: normalBold,
-              ),
-              Icon(
-                Icons.double_arrow_rounded,
-                color: green,
-                size: 20,
-              ),
-            ],
+          GestureDetector(
+            onTap: () => Get.toNamed(Routes.ALLPRODUCTS)!
+                .then((value) => controller.setSystemBar()),
+            child: Row(
+              children: [
+                Text(
+                  'See All',
+                  style: normalBold,
+                ),
+                Icon(
+                  Icons.double_arrow_rounded,
+                  color: green,
+                  size: 20,
+                ),
+              ],
+            ),
           ),
         ],
       ),

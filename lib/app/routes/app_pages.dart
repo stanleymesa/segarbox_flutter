@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:segarbox_flutter/app/modules/address/bindings/address_binding.dart';
 import 'package:segarbox_flutter/app/modules/address/views/address_view.dart';
+import 'package:segarbox_flutter/app/modules/allproducts/bindings/allproducts_binding.dart';
+import 'package:segarbox_flutter/app/modules/allproducts/views/allproducts_view.dart';
 import 'package:segarbox_flutter/app/modules/cart/bindings/cart_binding.dart';
 import 'package:segarbox_flutter/app/modules/cart/views/cart_view.dart';
 import 'package:segarbox_flutter/app/modules/checkout/bindings/checkout_binding.dart';
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.RATING,
       page: () => RatingView(),
       binding: RatingBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALLPRODUCTS,
+      page: () => AllproductsView(),
+      binding: AllproductsBinding(),
     ),
   ];
 }
