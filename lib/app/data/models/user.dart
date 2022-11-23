@@ -4,12 +4,13 @@
 
 import 'dart:convert';
 
-User userFromJson(String str) => User.fromJson(json.decode(str));
+UserResponse userFromJson(String str) =>
+    UserResponse.fromJson(json.decode(str));
 
-String userToJson(User data) => json.encode(data.toJson());
+String userToJson(UserResponse data) => json.encode(data.toJson());
 
-class User {
-  User({
+class UserResponse {
+  UserResponse({
     this.page,
     this.perPage,
     this.total,
@@ -21,16 +22,16 @@ class User {
   int? perPage;
   int? total;
   int? totalPages;
-  List<Data>? data;
+  List<User>? data;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
         page: json["page"] == null ? null : json["page"],
         perPage: json["per_page"] == null ? null : json["per_page"],
         total: json["total"] == null ? null : json["total"],
         totalPages: json["total_pages"] == null ? null : json["total_pages"],
         data: json["data"] == null
             ? null
-            : List<Data>.from(json["data"].map((x) => Data.fromJson(x))),
+            : List<User>.from(json["data"].map((x) => User.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,8 +45,8 @@ class User {
       };
 }
 
-class Data {
-  Data({
+class User {
+  User({
     this.id,
     this.email,
     this.firstName,
@@ -59,7 +60,7 @@ class Data {
   String? lastName;
   String? avatar;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"] == null ? null : json["id"],
         email: json["email"] == null ? null : json["email"],
         firstName: json["first_name"] == null ? null : json["first_name"],

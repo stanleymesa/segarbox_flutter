@@ -53,7 +53,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
 
   // User
   final HomeProvider homeProvider = HomeProvider();
-  final user = User().obs;
+  final user = UserResponse().obs;
   final isUserLoading = true.obs;
   final isUserError = {
     'isError': false,
