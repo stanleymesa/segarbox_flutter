@@ -15,6 +15,7 @@ abstract class Routes {
   static const INVOICE = _Paths.INVOICE;
   static const RATING = _Paths.RATING;
   static const ALLPRODUCTS = _Paths.ALLPRODUCTS;
+  static const LOGIN = _Paths.LOGIN;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const INVOICE = '/invoice';
   static const RATING = '/rating';
   static const ALLPRODUCTS = '/allproducts';
+  static const LOGIN = '/login';
 }
