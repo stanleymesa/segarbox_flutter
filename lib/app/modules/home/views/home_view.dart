@@ -148,17 +148,22 @@ class GridView1 extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      ),
-                      child: Image.asset(
-                        'assets/image/veggie.jpg',
-                        width: 150,
-                        height: 125,
-                        fit: BoxFit.fill,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            child: Image.asset(
+                              'assets/image/veggie.jpg',
+                              height: 140,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 8,
@@ -267,7 +272,7 @@ class HorizontalListView1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 275,
+      height: 285,
       child: Obx(
         () => (controller.isUserLoading.value)
             ? Shimmer.fromColors(
@@ -311,21 +316,27 @@ class HorizontalListView1 extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
-                                    child: Image.network(
-                                      controller.user.value.data![index].avatar
-                                          .toString(),
-                                      width: 150,
-                                      height: 125,
-                                      fit: BoxFit.fill,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(10),
+                                            topRight: Radius.circular(10),
+                                          ),
+                                          child: Image.network(
+                                            controller
+                                                .user.value.data![index].avatar
+                                                .toString(),
+                                            height: 140,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(
-                                    height: 8,
+                                    height: 12,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
