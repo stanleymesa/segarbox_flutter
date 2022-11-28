@@ -94,25 +94,4 @@ class HomeController extends GetxController with WidgetsBindingObserver {
   void onClose() {
     scrollC.dispose();
   }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        print('STATE: ${state}');
-        break;
-      case AppLifecycleState.inactive:
-        print('STATE: ${state}');
-
-        break;
-      case AppLifecycleState.paused:
-        print('STATE: ${state}');
-
-        break;
-      case AppLifecycleState.detached:
-        print('STATE: ${state}');
-
-        break;
-    }
-  }
 }
