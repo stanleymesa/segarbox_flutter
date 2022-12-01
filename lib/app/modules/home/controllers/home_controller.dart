@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/data/models/user.dart';
@@ -6,7 +8,7 @@ import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeController extends GetxController with WidgetsBindingObserver {
+class HomeController extends GetxController with StateMixin<UserResponse> {
   // Fading AppBar
   final ScrollController scrollC = ScrollController();
   final ratio = 0.0.obs;
@@ -76,18 +78,30 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     });
 
     isUserLoading.value = true;
+    change(null, status: RxStatus.loading());
     homeProvider.fetchUsers().then(
       (value) {
         user.value = value;
         isUserLoading.value = false;
+
+        if (value.data != null) {
+          if (value.data!.isNotEmpty) {
+            change(value, status: RxStatus.success());
+          } else {
+            change(null, status: RxStatus.empty());
+          }
+        } else {
+          change(null, status: RxStatus.empty());
+        }
       },
       onError: (error) {
-        print(error.toString());
         isUserLoading.value = false;
         isUserError.value = {
           'isError': true,
           'error': error.toString(),
         };
+
+        change(null, status: RxStatus.error(error.toString()));
       },
     );
   }
