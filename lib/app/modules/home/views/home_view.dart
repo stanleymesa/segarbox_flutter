@@ -281,139 +281,137 @@ class HorizontalListView1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 285,
-      child: Obx(
-        () => (controller.isUserLoading.value)
-            ? Shimmer.fromColors(
-                baseColor: Colors.black12,
-                highlightColor: defaultWhite,
-                child: ListView.separated(
-                  padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => Card(
-                    color: defaultWhite,
-                    elevation: 8,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: SizedBox(
-                      width: 150,
-                    ),
-                  ),
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: 16,
-                  ),
-                  itemCount: 5,
-                ),
-              )
-            : ListView.separated(
-                padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => (index !=
-                        controller.user.value.data!.length)
-                    ? Stack(
-                        children: [
-                          Card(
-                            color: Colors.white,
-                            elevation: 8,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: SizedBox(
-                              width: 150,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+      child: controller.obx(
+        (userResponse) => ListView.separated(
+            padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => (index !=
+                    userResponse!.data!.length)
+                ? Stack(
+                    children: [
+                      Card(
+                        color: Colors.white,
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: SizedBox(
+                          width: 150,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(10),
-                                            topRight: Radius.circular(10),
-                                          ),
-                                          child: Image.network(
-                                            controller
-                                                .user.value.data![index].avatar
-                                                .toString(),
-                                            height: 140,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
+                                  Expanded(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 12,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Text(
-                                      '${controller.user.value.data![index].firstName} ${controller.user.value.data![index].lastName}',
-                                      style: normalBold,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Text(
-                                      '500 g',
-                                      style: normalDark,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Text(
-                                      'Rp 20.000',
-                                      style: normalBold,
+                                      child: Image.network(
+                                        userResponse.data![index].avatar
+                                            .toString(),
+                                        height: 140,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
-                            ),
-                          ),
-                          Positioned.fill(
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                splashColor: green.withOpacity(0.2),
-                                onTap: () => Get.toNamed(Routes.DETAIL)!
-                                    .then((value) => controller.setSystemBar()),
+                              SizedBox(
+                                height: 12,
                               ),
-                            ),
-                          )
-                        ],
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'See All',
-                            style: normalBold,
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  '${userResponse.data![index].firstName} ${userResponse.data![index].lastName}',
+                                  style: normalBold,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  '500 g',
+                                  style: normalDark,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  'Rp 20.000',
+                                  style: normalBold,
+                                ),
+                              ),
+                            ],
                           ),
-                          Icon(
-                            Icons.double_arrow_rounded,
-                            color: green,
-                            size: 20,
-                          )
-                        ],
+                        ),
                       ),
-                separatorBuilder: (context, index) => SizedBox(
-                      width: 16,
-                    ),
-                itemCount: controller.user.value.data!.length + 1),
+                      Positioned.fill(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            splashColor: green.withOpacity(0.2),
+                            onTap: () => Get.toNamed(Routes.DETAIL)!
+                                .then((value) => controller.setSystemBar()),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'See All',
+                        style: normalBold,
+                      ),
+                      Icon(
+                        Icons.double_arrow_rounded,
+                        color: green,
+                        size: 20,
+                      )
+                    ],
+                  ),
+            separatorBuilder: (context, index) => SizedBox(
+                  width: 16,
+                ),
+            itemCount: userResponse!.data!.length + 1),
+        onLoading: Shimmer.fromColors(
+          baseColor: Colors.black12,
+          highlightColor: defaultWhite,
+          child: ListView.separated(
+            padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => Card(
+              color: defaultWhite,
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: SizedBox(
+                width: 150,
+              ),
+            ),
+            separatorBuilder: (context, index) => SizedBox(
+              width: 16,
+            ),
+            itemCount: 5,
+          ),
+        ),
+        onEmpty: Text('Empty'),
+        onError: (error) => Text(error.toString()),
       ),
     );
   }
