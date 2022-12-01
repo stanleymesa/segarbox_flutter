@@ -212,8 +212,9 @@ class ProfilePage extends GetView<ProfileController> {
                       child: SizedBox(
                         width: Get.width,
                         child: ElevatedButton(
-                          onPressed: () {
-                            Get.toNamed(Routes.LOGIN);
+                          onPressed: () async {
+                            controller.removeToken();
+                            homeController.currentNavPage.value = 0;
                           },
                           child: Text(
                             'Logout',

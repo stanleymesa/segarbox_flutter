@@ -10,3 +10,6 @@ const double defaultStackTop = expandedHeight - stackHeight;
 const double expandedHeight = 250;
 const double diameter = 80;
 const double defaultTop = expandedHeight - (diameter / 2);
+
+// Prefs
+const String tokenCode = 'token';

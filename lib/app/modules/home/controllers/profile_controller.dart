@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
+import 'package:segarbox_flutter/utils/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends GetxController {
   // Status Bar
@@ -18,6 +20,12 @@ class ProfileController extends GetxController {
 
   // Switch Dark Mode
   final isDarkMode = false.obs;
+
+  // Prefs
+  void removeToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(tokenCode);
+  }
 
   @override
   void onInit() {

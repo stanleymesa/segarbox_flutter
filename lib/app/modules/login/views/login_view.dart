@@ -158,7 +158,10 @@ class SignUpTab extends StatelessWidget {
             height: 48,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () async {
+              final token = await controller.getToken();
+              Get.snackbar('TOKEN', token);
+            },
             child: Text(
               'Sign Up',
               style: title.copyWith(color: defaultWhite),
@@ -220,7 +223,10 @@ class LoginTab extends StatelessWidget {
               height: 48,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                controller.saveToken('TOKEN INI BOSS');
+                Get.back();
+              },
               child: Text(
                 'Login',
                 style: title.copyWith(color: defaultWhite),
