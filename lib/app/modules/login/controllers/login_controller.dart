@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/utils/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   // Login Section
@@ -38,6 +40,16 @@ class LoginController extends GetxController {
   final conPasswordSignUpFocus = FocusNode();
   final isConPasswordSignUpFocus = false.obs;
   final conPasswordSignUpTextEditingController = TextEditingController();
+
+  void saveToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(tokenCode, token);
+  }
+
+  Future<String> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return await prefs.getString(tokenCode) ?? '';
+  }
 
   @override
   void onInit() {

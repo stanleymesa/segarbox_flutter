@@ -45,7 +45,15 @@ class HomeView extends GetView<HomeController> {
           unselectedLabelStyle: normalDark.copyWith(fontSize: 12),
           selectedItemColor: green,
           currentIndex: controller.currentNavPage.value,
-          onTap: (index) => controller.currentNavPage.value = index,
+          onTap: (index) async {
+            if (index != 0) {
+              (await controller.getToken() != '')
+                  ? controller.currentNavPage.value = index
+                  : Get.toNamed(Routes.LOGIN);
+            } else {
+              controller.currentNavPage.value = index;
+            }
+          },
         ),
       ),
     );
