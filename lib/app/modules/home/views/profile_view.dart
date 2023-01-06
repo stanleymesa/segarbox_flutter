@@ -182,14 +182,16 @@ class ProfilePage extends GetView<ProfileController> {
                             height: 20,
                             child: Obx(
                               () => Switch(
-                                value: controller.isDarkMode.value,
-                                activeColor: green,
-                                activeTrackColor: Color(0x52000000),
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                                onChanged: (_) =>
-                                    controller.isDarkMode.toggle(),
-                              ),
+                                  value: controller.isDarkMode.value,
+                                  activeColor: green,
+                                  activeTrackColor: Color(0x52000000),
+                                  onChanged: (value) async {
+                                    controller.isDarkMode.value = value;
+                                    controller.saveIsDarkMode(value);
+                                    Get.changeThemeMode(
+                                      value ? ThemeMode.dark : ThemeMode.light,
+                                    );
+                                  }),
                             ),
                           )
                         ],
