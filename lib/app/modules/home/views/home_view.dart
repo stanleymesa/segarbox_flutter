@@ -41,8 +41,8 @@ class HomeView extends GetView<HomeController> {
               label: 'Profile',
             ),
           ],
-          selectedLabelStyle: normalDark.copyWith(fontSize: 12),
-          unselectedLabelStyle: normalDark.copyWith(fontSize: 12),
+          selectedLabelStyle: Get.textTheme.bodyText1,
+          unselectedLabelStyle: Get.textTheme.bodyText1,
           selectedItemColor: green,
           currentIndex: controller.currentNavPage.value,
           onTap: (index) async {
@@ -146,7 +146,7 @@ class GridView1 extends StatelessWidget {
         itemBuilder: (context, index) => Stack(
           children: [
             Card(
-              color: Colors.white,
+              color: Get.isDarkMode ? Colors.grey : Colors.white,
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -180,7 +180,8 @@ class GridView1 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         controller.listTitle[index],
-                        style: normalBold,
+                        style: Get.textTheme.headline1!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                     SizedBox(
@@ -190,7 +191,7 @@ class GridView1 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         '500 g',
-                        style: normalDark,
+                        style: Get.textTheme.headline1,
                       ),
                     ),
                     SizedBox(
@@ -200,7 +201,8 @@ class GridView1 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Rp 20.000',
-                        style: normalBold,
+                        style: Get.textTheme.headline1!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -244,7 +246,7 @@ class AllProductsTitle extends StatelessWidget {
         children: [
           Text(
             'All Products',
-            style: title,
+            style: Get.textTheme.headlineLarge,
           ),
           GestureDetector(
             onTap: () => Get.toNamed(Routes.ALLPRODUCTS)!
@@ -253,7 +255,8 @@ class AllProductsTitle extends StatelessWidget {
               children: [
                 Text(
                   'See All',
-                  style: normalBold,
+                  style: Get.textTheme.headline1!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
                 Icon(
                   Icons.double_arrow_rounded,
@@ -286,7 +289,7 @@ class HorizontalListView1 extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => (index !=
-                    userResponse!.data!.length)
+                    userResponse.data!.length)
                 ? Stack(
                     children: [
                       Card(
@@ -326,7 +329,8 @@ class HorizontalListView1 extends StatelessWidget {
                                     const EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
                                   '${userResponse.data![index].firstName} ${userResponse.data![index].lastName}',
-                                  style: normalBold,
+                                  style: Get.textTheme.headline1!
+                                      .copyWith(fontWeight: FontWeight.bold),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -339,7 +343,7 @@ class HorizontalListView1 extends StatelessWidget {
                                     const EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
                                   '500 g',
-                                  style: normalDark,
+                                  style: Get.textTheme.headline1,
                                 ),
                               ),
                               SizedBox(
@@ -350,7 +354,8 @@ class HorizontalListView1 extends StatelessWidget {
                                     const EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
                                   'Rp 20.000',
-                                  style: normalBold,
+                                  style: Get.textTheme.headline1!
+                                      .copyWith(fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -375,7 +380,8 @@ class HorizontalListView1 extends StatelessWidget {
                     children: [
                       Text(
                         'See All',
-                        style: normalBold,
+                        style: Get.textTheme.headline1!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                       Icon(
                         Icons.double_arrow_rounded,
@@ -395,7 +401,7 @@ class HorizontalListView1 extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => Card(
-              color: defaultWhite,
+              color: Get.theme.cardColor,
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),

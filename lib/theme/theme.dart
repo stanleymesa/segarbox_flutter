@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -44,9 +45,10 @@ TextStyle smallLight = GoogleFonts.poppins().copyWith(
   fontSize: 12,
 );
 
-void systemBarColor(
-    {Color statusBarColor = Colors.transparent,
-    Color navBarColor = Colors.white}) {
+void systemBarColor({
+  Color statusBarColor = Colors.transparent,
+  Color navBarColor = Colors.white,
+}) {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
         statusBarColor: statusBarColor,

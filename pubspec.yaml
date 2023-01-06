@@ -34,6 +34,11 @@ dev_dependencies:
 flutter: 
   uses-material-design: true
 
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf
+
   assets:
     - assets/lottie/
     - assets/image/

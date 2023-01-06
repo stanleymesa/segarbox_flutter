@@ -13,3 +13,4 @@ const double defaultTop = expandedHeight - (diameter / 2);
 
 // Prefs
 const String tokenCode = 'token';
+const String darkModeCode = 'darkMode';

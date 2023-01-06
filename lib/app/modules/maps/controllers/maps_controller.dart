@@ -73,7 +73,6 @@ class MapsController extends GetxController {
         element.administrativeArea != null &&
         element.postalCode != null &&
         element.country != null);
-    print(currentPlacemark.value.toString());
   }
 
   @override

@@ -18,10 +18,15 @@ class ProfileController extends GetxController {
   final ScrollController scrollC = ScrollController();
   final scrollOffset = 0.0.obs;
 
-  // Switch Dark Mode
-  final isDarkMode = false.obs;
+  // Dark Mode
+  final isDarkMode = Get.isDarkMode ? true.obs : false.obs;
 
-  // Prefs
+  void saveIsDarkMode(bool isDarkMode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(darkModeCode, isDarkMode);
+  }
+
+  // Logout
   void removeToken() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(tokenCode);
