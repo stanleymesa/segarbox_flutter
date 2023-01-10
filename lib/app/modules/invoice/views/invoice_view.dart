@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
-import 'package:segarbox_flutter/theme/theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 
 import '../controllers/invoice_controller.dart';
 
@@ -13,12 +13,15 @@ class InvoiceView extends GetView<InvoiceController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: defaultWhite,
+        backgroundColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite,
         title: Text(
           'Invoice',
-          style: title.copyWith(color: green),
+          style:
+              Get.textTheme.headlineLarge!.copyWith(color: AppColorTheme.green),
         ),
-        iconTheme: IconThemeData(color: green),
+        iconTheme: IconThemeData(color: AppColorTheme.green),
         titleSpacing: 0,
         elevation: 0.2,
       ),
@@ -33,7 +36,7 @@ class InvoiceView extends GetView<InvoiceController> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
                   'Delivery Address',
-                  style: title,
+                  style: Get.textTheme.headlineLarge,
                 ),
               ),
               SizedBox(
@@ -46,7 +49,9 @@ class InvoiceView extends GetView<InvoiceController> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                     border: Border.all(
-                      color: black,
+                      color: Get.isDarkMode
+                          ? AppColorTheme.defaultWhite
+                          : AppColorTheme.defaultBlack,
                       width: 2,
                     ),
                   ),
@@ -55,14 +60,15 @@ class InvoiceView extends GetView<InvoiceController> {
                     children: [
                       Text(
                         'Stanley Mesa',
-                        style: normalBold,
+                        style: Get.textTheme.headline1!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 8,
                       ),
                       Text(
                         'Jl. Pandansari Raya No 99, Kecamatan Semarang Tengah, Kota Semarang, Jawa Tengah 50139, Indonesia',
-                        style: normalDark,
+                        style: Get.textTheme.headline1,
                       )
                     ],
                   ),
@@ -81,7 +87,7 @@ class InvoiceView extends GetView<InvoiceController> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
                   'Checkout Items',
-                  style: title,
+                  style: Get.textTheme.headlineLarge,
                 ),
               ),
               ListView.separated(
@@ -128,15 +134,15 @@ class InvoiceView extends GetView<InvoiceController> {
                         children: [
                           Text(
                             'Broccoli',
-                            style: normalDark.copyWith(
-                                fontWeight: FontWeight.normal),
+                            style: Get.textTheme.headline1!
+                                .copyWith(fontWeight: FontWeight.normal),
                           ),
                           SizedBox(
                             height: 4,
                           ),
                           Text(
                             '1000 g',
-                            style: smallDark,
+                            style: Get.textTheme.bodyText1,
                           ),
                           SizedBox(
                             height: 12,
@@ -145,21 +151,25 @@ class InvoiceView extends GetView<InvoiceController> {
                             children: [
                               Text(
                                 'Rp 20.000',
-                                style: normalBold,
+                                style: Get.textTheme.headline1!
+                                    .copyWith(fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 width: 4,
                               ),
                               Text(
                                 'X',
-                                style: normalBold.copyWith(color: green),
+                                style: Get.textTheme.headline1!
+                                    .copyWith(fontWeight: FontWeight.bold)
+                                    .copyWith(color: AppColorTheme.green),
                               ),
                               SizedBox(
                                 width: 4,
                               ),
                               Text(
                                 '2',
-                                style: normalBold,
+                                style: Get.textTheme.headline1!
+                                    .copyWith(fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
@@ -177,12 +187,14 @@ class InvoiceView extends GetView<InvoiceController> {
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               width: Get.width,
               decoration: BoxDecoration(
-                color: defaultWhite,
+                color: Get.isDarkMode
+                    ? AppColorTheme.defaultBlack
+                    : AppColorTheme.defaultWhite,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 12,
-                    offset: Offset(0, -1),
+                    color: Get.isDarkMode ? Colors.white12 : Colors.black12,
+                    blurRadius: 24,
+                    offset: Offset(0, -2),
                   )
                 ],
               ),
@@ -194,11 +206,12 @@ class InvoiceView extends GetView<InvoiceController> {
                     children: [
                       Text(
                         'Total Price',
-                        style: normalDark,
+                        style: Get.textTheme.headline1,
                       ),
                       Text(
                         'Rp 68.000',
-                        style: normalBold,
+                        style: Get.textTheme.headline1!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -208,13 +221,15 @@ class InvoiceView extends GetView<InvoiceController> {
                           context, ModalRoute.withName(Routes.HOME));
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: green,
+                        backgroundColor: AppColorTheme.green,
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8)))),
                     child: Text(
                       'Complete',
-                      style: normalBold.copyWith(color: defaultWhite),
+                      style: Get.textTheme.headline1!.copyWith(
+                          color: AppColorTheme.defaultWhite,
+                          fontWeight: FontWeight.bold),
                     ),
                   )
                 ],

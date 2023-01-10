@@ -4,13 +4,13 @@ import 'package:segarbox_flutter/theme/color_theme.dart';
 abstract class AppTextTheme {
   static TextTheme light = TextTheme(
     headlineLarge: TextStyle(
-      color: AppColorTheme.black,
+      color: AppColorTheme.defaultBlack,
       fontWeight: FontWeight.bold,
       fontStyle: FontStyle.normal,
       fontSize: 16,
     ),
     headline1: TextStyle(
-      color: AppColorTheme.black,
+      color: AppColorTheme.defaultBlack,
       fontSize: 14,
       fontStyle: FontStyle.normal,
     ),
@@ -20,7 +20,7 @@ abstract class AppTextTheme {
       fontSize: 14,
     ),
     bodyText1: TextStyle(
-      color: AppColorTheme.black,
+      color: AppColorTheme.defaultBlack,
       fontStyle: FontStyle.normal,
       fontSize: 12,
     ),
@@ -44,7 +44,7 @@ abstract class AppTextTheme {
       fontStyle: FontStyle.normal,
     ),
     headline2: TextStyle(
-      color: AppColorTheme.black,
+      color: AppColorTheme.defaultBlack,
       fontStyle: FontStyle.normal,
       fontSize: 14,
     ),
@@ -54,7 +54,7 @@ abstract class AppTextTheme {
       fontSize: 12,
     ),
     bodyText2: TextStyle(
-      color: AppColorTheme.black,
+      color: AppColorTheme.defaultBlack,
       fontStyle: FontStyle.normal,
       fontSize: 12,
     ),

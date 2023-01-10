@@ -5,9 +5,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:segarbox_flutter/theme/app_theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class MapsController extends GetxController {
   Completer<GoogleMapController> completer = Completer();
+  final mapStyle = ''.obs;
 
   final markers = <Marker>[
     Marker(
@@ -75,10 +79,25 @@ class MapsController extends GetxController {
         element.country != null);
   }
 
+  void setSystemBar() {
+    AppTheme.systemBarColor(
+        navBarColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite);
+  }
+
   @override
   void onInit() {
     super.onInit();
+    setSystemBar();
+    rootBundle.loadString('assets/maps/map_style.txt').then(
+          (value) => mapStyle.value = value,
+        );
     getCurrentPosition();
+    AppTheme.systemBarColor(
+        navBarColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite);
   }
 
   @override

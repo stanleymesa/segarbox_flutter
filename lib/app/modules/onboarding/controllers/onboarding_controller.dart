@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/data/models/onboarding.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 class OnboardingController extends GetxController {
@@ -28,7 +28,10 @@ class OnboardingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    systemBarColor(navBarColor: defaultWhite);
+    systemBarColor(
+        navBarColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite);
   }
 
   @override

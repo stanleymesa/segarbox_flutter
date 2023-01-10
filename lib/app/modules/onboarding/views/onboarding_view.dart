@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 import '../controllers/onboarding_controller.dart';
@@ -39,13 +40,13 @@ class Skip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      right: 16,
-      top: 16,
+      right: 24,
+      top: 24,
       child: GestureDetector(
         onTap: () => Get.offAllNamed(Routes.HOME),
         child: Icon(
           Icons.double_arrow_rounded,
-          color: black,
+          color: AppColorTheme.green,
         ),
       ),
     );
@@ -63,7 +64,7 @@ class Indicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 24),
+      padding: const EdgeInsets.only(top: 32),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
@@ -77,7 +78,7 @@ class Indicator extends StatelessWidget {
                 height: 8,
                 decoration: BoxDecoration(
                     color: (index == controller.currentPage.value)
-                        ? black
+                        ? (Get.isDarkMode ? AppColorTheme.defaultWhite : black)
                         : Colors.grey,
                     borderRadius: BorderRadius.all(Radius.circular(8))),
               ),
@@ -116,14 +117,14 @@ class OnBoardingInfo extends StatelessWidget {
               ),
               Text(
                 controller.onBoarding[index].title,
-                style: title,
+                style: Get.textTheme.headlineLarge,
               ),
               SizedBox(
                 height: 16,
               ),
               Text(
                 controller.onBoarding[index].desc,
-                style: normalDark,
+                style: Get.textTheme.headline1,
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -141,7 +142,7 @@ class OnBoardingInfo extends StatelessWidget {
                       : {},
                   child: Text(
                     'Get Started',
-                    style: title.copyWith(
+                    style: Get.textTheme.headlineLarge!.copyWith(
                         fontWeight: FontWeight.normal,
                         decoration: TextDecoration.underline),
                   ),

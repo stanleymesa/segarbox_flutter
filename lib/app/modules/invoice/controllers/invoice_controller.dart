@@ -1,12 +1,19 @@
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/theme/app_theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 
 class InvoiceController extends GetxController {
-  //TODO: Implement InvoiceController
+  void setSystemBar() {
+    AppTheme.systemBarColor(
+        navBarColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite);
+  }
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    setSystemBar();
   }
 
   @override
@@ -16,5 +23,4 @@ class InvoiceController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

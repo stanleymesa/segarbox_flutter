@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
-import 'package:segarbox_flutter/theme/theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 
 import '../controllers/checkout_controller.dart';
 
@@ -11,12 +11,15 @@ class CheckoutView extends GetView<CheckoutController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: defaultWhite,
+        backgroundColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite,
         title: Text(
           'Checkout',
-          style: title.copyWith(color: green),
+          style:
+              Get.textTheme.headlineLarge!.copyWith(color: AppColorTheme.green),
         ),
-        iconTheme: IconThemeData(color: green),
+        iconTheme: IconThemeData(color: AppColorTheme.green),
         titleSpacing: 0,
         elevation: 0.2,
       ),
@@ -31,7 +34,7 @@ class CheckoutView extends GetView<CheckoutController> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
                   'Delivery Address',
-                  style: title,
+                  style: Get.textTheme.headlineLarge,
                 ),
               ),
               SizedBox(
@@ -41,7 +44,7 @@ class CheckoutView extends GetView<CheckoutController> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
                   'Jl Pandansari Raya No 00, Semarang Tengah, Jawa Tengah, Indonesia',
-                  style: normalDark,
+                  style: Get.textTheme.headline1,
                 ),
               ),
               SizedBox(
@@ -55,10 +58,12 @@ class CheckoutView extends GetView<CheckoutController> {
                   },
                   child: Text(
                     'Choose Address',
-                    style: normalBold.copyWith(color: defaultWhite),
+                    style: Get.textTheme.headline1!.copyWith(
+                        color: AppColorTheme.defaultWhite,
+                        fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: green,
+                      backgroundColor: AppColorTheme.green,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8)))),
                 ),
@@ -76,7 +81,7 @@ class CheckoutView extends GetView<CheckoutController> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
                   'Checkout Items',
-                  style: title,
+                  style: Get.textTheme.headlineLarge,
                 ),
               ),
               ListView.separated(
@@ -123,15 +128,15 @@ class CheckoutView extends GetView<CheckoutController> {
                         children: [
                           Text(
                             'Broccoli',
-                            style: normalDark.copyWith(
-                                fontWeight: FontWeight.normal),
+                            style: Get.textTheme.headline1!
+                                .copyWith(fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 4,
                           ),
                           Text(
                             '1000 g',
-                            style: smallDark,
+                            style: Get.textTheme.bodyText1,
                           ),
                           SizedBox(
                             height: 12,
@@ -140,21 +145,24 @@ class CheckoutView extends GetView<CheckoutController> {
                             children: [
                               Text(
                                 'Rp 20.000',
-                                style: normalBold,
+                                style: Get.textTheme.headline1!
+                                    .copyWith(fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 width: 4,
                               ),
                               Text(
                                 'X',
-                                style: normalBold.copyWith(color: green),
+                                style: Get.textTheme.headline1!
+                                    .copyWith(color: AppColorTheme.green),
                               ),
                               SizedBox(
                                 width: 4,
                               ),
                               Text(
                                 '2',
-                                style: normalBold,
+                                style: Get.textTheme.headline1!
+                                    .copyWith(fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
@@ -179,17 +187,18 @@ class CheckoutView extends GetView<CheckoutController> {
                       children: [
                         Text(
                           'Shipping Method',
-                          style: title,
+                          style: Get.textTheme.headlineLarge,
                         ),
                         Row(
                           children: [
                             Text(
                               'Choose',
-                              style: normalDark.copyWith(color: green),
+                              style: Get.textTheme.headline1!
+                                  .copyWith(color: AppColorTheme.green),
                             ),
                             Icon(
                               Icons.arrow_forward_ios_rounded,
-                              color: green,
+                              color: AppColorTheme.green,
                             ),
                           ],
                         )
@@ -227,21 +236,22 @@ class CheckoutView extends GetView<CheckoutController> {
                               children: [
                                 Text(
                                   'JNE',
-                                  style: normalBold,
+                                  style: Get.textTheme.headline1!
+                                      .copyWith(fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
                                   height: 4,
                                 ),
                                 Text(
                                   'REG',
-                                  style: normalDark,
+                                  style: Get.textTheme.headline1,
                                 ),
                                 SizedBox(
                                   height: 4,
                                 ),
                                 Text(
                                   '1 - 2 Hari',
-                                  style: normalDark,
+                                  style: Get.textTheme.headline1,
                                 ),
                               ],
                             )
@@ -249,7 +259,7 @@ class CheckoutView extends GetView<CheckoutController> {
                         ),
                         Text(
                           'Rp 19.000',
-                          style: normalBold,
+                          style: Get.textTheme.headline1,
                         ),
                       ],
                     )
@@ -269,7 +279,7 @@ class CheckoutView extends GetView<CheckoutController> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
                   'Payment Details',
-                  style: title,
+                  style: Get.textTheme.headlineLarge,
                 ),
               ),
               SizedBox(
@@ -280,7 +290,11 @@ class CheckoutView extends GetView<CheckoutController> {
                 child: Container(
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      border: Border.all(color: black, width: 2),
+                      border: Border.all(
+                          color: Get.isDarkMode
+                              ? AppColorTheme.defaultWhite
+                              : AppColorTheme.defaultBlack,
+                          width: 2),
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                   child: Column(
                     children: [
@@ -289,11 +303,11 @@ class CheckoutView extends GetView<CheckoutController> {
                         children: [
                           Text(
                             'Product Sub Total',
-                            style: normalDark,
+                            style: Get.textTheme.headline1,
                           ),
                           Text(
                             'Rp 49.000',
-                            style: normalDark,
+                            style: Get.textTheme.headline1,
                           ),
                         ],
                       ),
@@ -305,11 +319,11 @@ class CheckoutView extends GetView<CheckoutController> {
                         children: [
                           Text(
                             'Shipping Cost',
-                            style: normalDark,
+                            style: Get.textTheme.headline1,
                           ),
                           Text(
                             'Rp 19.000',
-                            style: normalDark,
+                            style: Get.textTheme.headline1,
                           ),
                         ],
                       ),
@@ -321,11 +335,13 @@ class CheckoutView extends GetView<CheckoutController> {
                         children: [
                           Text(
                             'Total Price',
-                            style: normalBold,
+                            style: Get.textTheme.headline1!
+                                .copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             'Rp 68.000',
-                            style: normalBold,
+                            style: Get.textTheme.headline1!
+                                .copyWith(fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -344,12 +360,14 @@ class CheckoutView extends GetView<CheckoutController> {
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               width: Get.width,
               decoration: BoxDecoration(
-                color: defaultWhite,
+                color: Get.isDarkMode
+                    ? AppColorTheme.defaultBlack
+                    : AppColorTheme.defaultWhite,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 12,
-                    offset: Offset(0, -1),
+                    color: Get.isDarkMode ? Colors.white12 : Colors.black12,
+                    blurRadius: 24,
+                    offset: Offset(0, -2),
                   )
                 ],
               ),
@@ -361,11 +379,12 @@ class CheckoutView extends GetView<CheckoutController> {
                     children: [
                       Text(
                         'Total Price',
-                        style: normalDark,
+                        style: Get.textTheme.headline1,
                       ),
                       Text(
                         'Rp 68.000',
-                        style: normalBold,
+                        style: Get.textTheme.headline1!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -374,13 +393,15 @@ class CheckoutView extends GetView<CheckoutController> {
                       Get.toNamed(Routes.INVOICE);
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: green,
+                        backgroundColor: AppColorTheme.green,
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8)))),
                     child: Text(
                       'Make Order',
-                      style: normalBold.copyWith(color: defaultWhite),
+                      style: Get.textTheme.headline1!.copyWith(
+                          color: AppColorTheme.defaultWhite,
+                          fontWeight: FontWeight.bold),
                     ),
                   )
                 ],
