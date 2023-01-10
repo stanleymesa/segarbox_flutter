@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
-import 'package:segarbox_flutter/theme/theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 
 import '../controllers/address_controller.dart';
 
@@ -11,12 +11,15 @@ class AddressView extends GetView<AddressController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: defaultWhite,
+          backgroundColor: Get.isDarkMode
+              ? AppColorTheme.defaultBlack
+              : AppColorTheme.defaultWhite,
           title: Text(
             'Address',
-            style: title.copyWith(color: green),
+            style: Get.textTheme.headlineLarge!
+                .copyWith(color: AppColorTheme.green),
           ),
-          iconTheme: IconThemeData(color: green),
+          iconTheme: IconThemeData(color: AppColorTheme.green),
           titleSpacing: 0,
           elevation: 0.2,
         ),
@@ -34,10 +37,12 @@ class AddressView extends GetView<AddressController> {
                 },
                 child: Text(
                   'Add Address',
-                  style: normalBold.copyWith(color: defaultWhite),
+                  style: Get.textTheme.headline1!.copyWith(
+                      color: AppColorTheme.defaultWhite,
+                      fontWeight: FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: green,
+                    backgroundColor: AppColorTheme.green,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)))),
               ),
@@ -67,7 +72,7 @@ class AddressView extends GetView<AddressController> {
                           Expanded(
                             child: Text(
                               'Jl Pandansari Raya No 00, Semarang Tengah, Jawa Tengah, Indonesia',
-                              style: normalDark,
+                              style: Get.textTheme.headline1,
                             ),
                           ),
                           SizedBox(

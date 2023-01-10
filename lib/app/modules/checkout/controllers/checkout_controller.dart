@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/theme/app_theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 
 class CheckoutController extends GetxController {
   //TODO: Implement CheckoutController
@@ -7,6 +10,10 @@ class CheckoutController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    AppTheme.systemBarColor(
+        navBarColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite);
   }
 
   @override

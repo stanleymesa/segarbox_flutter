@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
-import 'package:segarbox_flutter/theme/theme.dart';
+import 'package:segarbox_flutter/theme/app_theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 
 import '../controllers/cart_controller.dart';
 
@@ -12,15 +13,18 @@ class CartView extends GetView<CartController> {
 
   @override
   Widget build(BuildContext context) {
-    systemBarColor(statusBarColor: defaultWhite, navBarColor: defaultWhite);
+    controller.setSystemBar();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: defaultWhite,
+        backgroundColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite,
         title: Text(
           'My Cart',
-          style: title.copyWith(color: green),
+          style:
+              Get.textTheme.headlineLarge!.copyWith(color: AppColorTheme.green),
         ),
-        iconTheme: IconThemeData(color: green),
+        iconTheme: IconThemeData(color: AppColorTheme.green),
         titleSpacing: 0,
         elevation: 0.2,
       ),
@@ -54,7 +58,7 @@ class CartView extends GetView<CartController> {
                         height: 24,
                         child: Checkbox(
                           value: true,
-                          activeColor: green,
+                          activeColor: AppColorTheme.green,
                           onChanged: (value) {},
                         ),
                       ),
@@ -84,22 +88,23 @@ class CartView extends GetView<CartController> {
                           children: [
                             Text(
                               'Broccoli',
-                              style: normalDark.copyWith(
-                                  fontWeight: FontWeight.normal),
+                              style: Get.textTheme.headline1!
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 4,
                             ),
                             Text(
                               '1000 g',
-                              style: smallDark,
+                              style: Get.textTheme.bodyText1,
                             ),
                             SizedBox(
                               height: 12,
                             ),
                             Text(
                               'Rp 20.000',
-                              style: normalBold,
+                              style: Get.textTheme.headline1!
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -126,7 +131,7 @@ class CartView extends GetView<CartController> {
                           child: InkWell(
                             child: Icon(
                               Icons.remove_circle_outline_rounded,
-                              color: green,
+                              color: AppColorTheme.green,
                             ),
                             onTap: () {},
                           ),
@@ -137,7 +142,8 @@ class CartView extends GetView<CartController> {
                       ),
                       Text(
                         '13',
-                        style: normalBold,
+                        style: Get.textTheme.headline1!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         width: 8,
@@ -148,7 +154,7 @@ class CartView extends GetView<CartController> {
                           child: InkWell(
                             child: Icon(
                               Icons.add_circle_outline_rounded,
-                              color: green,
+                              color: AppColorTheme.green,
                             ),
                             onTap: () {},
                           ),
@@ -166,12 +172,14 @@ class CartView extends GetView<CartController> {
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               width: Get.width,
               decoration: BoxDecoration(
-                color: defaultWhite,
+                color: Get.isDarkMode
+                    ? AppColorTheme.defaultBlack
+                    : AppColorTheme.defaultWhite,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 12,
-                    offset: Offset(0, -1),
+                    color: Get.isDarkMode ? Colors.white12 : Colors.black12,
+                    blurRadius: 24,
+                    offset: Offset(0, -2),
                   )
                 ],
               ),
@@ -183,11 +191,12 @@ class CartView extends GetView<CartController> {
                     children: [
                       Text(
                         'Total Price',
-                        style: normalDark,
+                        style: Get.textTheme.headline1,
                       ),
                       Text(
                         'Rp 240.000',
-                        style: normalBold,
+                        style: Get.textTheme.headline1!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -196,13 +205,15 @@ class CartView extends GetView<CartController> {
                       Get.toNamed(Routes.CHECKOUT);
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: green,
+                        backgroundColor: AppColorTheme.green,
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8)))),
                     child: Text(
                       'Checkout',
-                      style: normalBold.copyWith(color: defaultWhite),
+                      style: Get.textTheme.headline1!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: AppColorTheme.defaultWhite),
                     ),
                   )
                 ],

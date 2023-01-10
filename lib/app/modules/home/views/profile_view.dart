@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/profile_controller.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
+import 'package:segarbox_flutter/theme/app_theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 
@@ -16,26 +18,10 @@ class ProfilePage extends GetView<ProfileController> {
 
   final HomeController homeController;
 
-  void resetProfileImage() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) {
-        controller.scrollOffset.value = 0;
-      },
-    );
-  }
-
-  void setStatusBarColor() {
-    Future.delayed(
-      200.milliseconds,
-      () => systemBarColor(
-          statusBarColor: controller.color.value, navBarColor: defaultWhite),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    resetProfileImage();
-    setStatusBarColor();
+    controller.scrollOffset.value = 0;
+    controller.setSystemBar();
     return WillPopScope(
       onWillPop: () async {
         homeController.currentNavPage.value = 0;
@@ -47,9 +33,9 @@ class ProfilePage extends GetView<ProfileController> {
             controller: controller.scrollC,
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
               SliverAppBar(
-                pinned: true,
+                pinned: false,
                 expandedHeight: expandedHeight,
-                backgroundColor: defaultWhite,
+                backgroundColor: Colors.transparent,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Image.asset(
                     'assets/image/japan.jpg',
@@ -66,171 +52,215 @@ class ProfilePage extends GetView<ProfileController> {
             ],
             body: ListView(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: (diameter / 2) + 8,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Text(
-                        'Agus Surmono Pakiyem Tuminah',
-                        style: title,
+                Obx(
+                  () => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: (diameter / 2) + 8,
                       ),
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Text(
-                        'agussumono@gmail.com',
-                        style: normalDark.copyWith(color: Colors.grey),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Text(
+                          'Agus Surmono Pakiyem Tuminah',
+                          style: (controller.isDarkMode.value)
+                              ? Get.textTheme.headlineLarge!
+                                  .copyWith(color: AppColorTheme.defaultWhite)
+                              : Get.textTheme.headlineLarge!
+                                  .copyWith(color: AppColorTheme.defaultBlack),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Divider(
-                      color: black,
-                      thickness: 2,
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'My Cart',
-                            style: normalBold,
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: green,
-                          )
-                        ],
+                      SizedBox(
+                        height: 4,
                       ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Divider(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Text(
+                          'agussumono@gmail.com',
+                          style: Get.textTheme.headline1!
+                              .copyWith(color: Colors.grey),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Divider(
+                        color: Colors.grey,
                         thickness: 2,
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Get.toNamed(Routes.RATING)!
-                          .then((_) async => setStatusBarColor()),
-                      child: Container(
-                        color: defaultWhite,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 24),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Rating',
-                                    style: normalBold,
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    color: green,
-                                  )
-                                ],
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 24,
                               ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 24),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'My Cart',
+                                      style: (controller.isDarkMode.value)
+                                          ? Get.textTheme.headline1!.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColorTheme.defaultWhite)
+                                          : Get.textTheme.headline1!.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color:
+                                                  AppColorTheme.defaultBlack),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color: AppColorTheme.green,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Divider(
+                          thickness: 2,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => Get.toNamed(Routes.RATING),
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 24),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Rating',
+                                      style: (controller.isDarkMode.value)
+                                          ? Get.textTheme.headline1!.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColorTheme.defaultWhite)
+                                          : Get.textTheme.headline1!.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color:
+                                                  AppColorTheme.defaultBlack),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color: AppColorTheme.green,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Divider(
+                          thickness: 2,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Dark Mode',
+                              style: (controller.isDarkMode.value)
+                                  ? Get.textTheme.headline1!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColorTheme.defaultWhite)
+                                  : Get.textTheme.headline1!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColorTheme.defaultBlack),
                             ),
                             SizedBox(
-                              height: 16,
-                            ),
+                              width: 50,
+                              height: 20,
+                              child: Obx(
+                                () => Switch(
+                                    value: controller.isDarkMode.value,
+                                    activeColor: AppColorTheme.green,
+                                    activeTrackColor: Color(0x52000000),
+                                    onChanged: (value) async {
+                                      controller.isDarkMode.value = value;
+                                      controller.saveIsDarkMode(value);
+                                      Get.changeThemeMode(
+                                        value
+                                            ? ThemeMode.dark
+                                            : ThemeMode.light,
+                                      );
+                                      AppTheme.systemBarColor(
+                                          navBarColor: value
+                                              ? AppColorTheme.defaultBlack
+                                              : AppColorTheme.defaultWhite);
+                                    }),
+                              ),
+                            )
                           ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Divider(
-                        thickness: 2,
+                      SizedBox(
+                        height: 16,
                       ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Dark Mode',
-                            style: normalBold,
-                          ),
-                          SizedBox(
-                            width: 50,
-                            height: 20,
-                            child: Obx(
-                              () => Switch(
-                                  value: controller.isDarkMode.value,
-                                  activeColor: green,
-                                  activeTrackColor: Color(0x52000000),
-                                  onChanged: (value) async {
-                                    controller.isDarkMode.value = value;
-                                    controller.saveIsDarkMode(value);
-                                    Get.changeThemeMode(
-                                      value ? ThemeMode.dark : ThemeMode.light,
-                                    );
-                                  }),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Divider(
-                        thickness: 2,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: SizedBox(
-                        width: Get.width,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            controller.removeToken();
-                            homeController.currentNavPage.value = 0;
-                          },
-                          child: Text(
-                            'Logout',
-                            style: title.copyWith(color: defaultWhite),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: green,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)))),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Divider(
+                          thickness: 2,
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 32,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: SizedBox(
+                          width: Get.width,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              controller.removeToken();
+                              homeController.currentNavPage.value = 0;
+                            },
+                            child: Text(
+                              'Logout',
+                              style: Get.textTheme.headlineLarge!
+                                  .copyWith(color: defaultWhite),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColorTheme.green,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)))),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

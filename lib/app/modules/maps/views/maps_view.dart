@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:segarbox_flutter/theme/theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 
 import '../controllers/maps_controller.dart';
 
@@ -11,21 +11,27 @@ class MapsView extends GetView<MapsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: defaultWhite,
+        backgroundColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite,
         title: Text(
           'Maps',
-          style: title.copyWith(color: green),
+          style:
+              Get.textTheme.headlineLarge!.copyWith(color: AppColorTheme.green),
         ),
-        iconTheme: IconThemeData(color: green),
+        iconTheme: IconThemeData(color: AppColorTheme.green),
         titleSpacing: 0,
         elevation: 0.2,
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 100),
         child: FloatingActionButton(
-          backgroundColor: green,
+          backgroundColor: AppColorTheme.green,
           onPressed: () => controller.getCurrentPosition(),
-          child: Icon(Icons.location_on_rounded),
+          child: Icon(
+            Icons.location_on_rounded,
+            color: AppColorTheme.defaultWhite,
+          ),
         ),
       ),
       body: Stack(
@@ -39,8 +45,12 @@ class MapsView extends GetView<MapsController> {
               onTap: (latLng) {
                 controller.goTo(latLng);
               },
-              onMapCreated: (mapController) =>
-                  controller.completer.complete(mapController),
+              onMapCreated: (mapController) {
+                controller.completer.complete(mapController);
+                if (Get.isDarkMode) {
+                  mapController.setMapStyle(controller.mapStyle.value);
+                }
+              },
               markers: controller.markers.toSet(),
               zoomControlsEnabled: false,
             ),
@@ -50,15 +60,14 @@ class MapsView extends GetView<MapsController> {
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: 24,
-                vertical: 16,
+                vertical: 32,
               ),
               width: Get.width,
               decoration: BoxDecoration(
-                color: defaultWhite,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 12,
+                    color: Get.isDarkMode ? Colors.white12 : Colors.black12,
+                    blurRadius: 16,
                     offset: Offset(0, -1),
                   )
                 ],
@@ -69,10 +78,12 @@ class MapsView extends GetView<MapsController> {
                 },
                 child: Text(
                   'Choose Address',
-                  style: normalBold.copyWith(color: defaultWhite),
+                  style: Get.textTheme.headline1!.copyWith(
+                      color: AppColorTheme.defaultWhite,
+                      fontWeight: FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: green,
+                    backgroundColor: AppColorTheme.green,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)))),
               ),
@@ -109,7 +120,6 @@ class InfoWindow extends StatelessWidget {
             padding: EdgeInsets.all(16),
             width: Get.width,
             decoration: BoxDecoration(
-              color: defaultWhite,
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             child: Row(
@@ -120,7 +130,7 @@ class InfoWindow extends StatelessWidget {
                     (controller.currentPlacemark.value.street != null)
                         ? '${controller.currentPlacemark.value.street}, ${controller.currentPlacemark.value.locality}, ${controller.currentPlacemark.value.subAdministrativeArea}, ${controller.currentPlacemark.value.administrativeArea}, ${controller.currentPlacemark.value.postalCode}, ${controller.currentPlacemark.value.country}'
                         : 'Location Not Found',
-                    style: normalDark,
+                    style: Get.textTheme.headline1,
                   ),
                 ),
                 SizedBox(
@@ -130,7 +140,7 @@ class InfoWindow extends StatelessWidget {
                   onTap: () => controller.isWindowClosed.value = true,
                   child: Icon(
                     Icons.close_rounded,
-                    color: green,
+                    color: AppColorTheme.green,
                   ),
                 ),
               ],

@@ -3,26 +3,27 @@ import 'package:flutter_lorem/flutter_lorem.dart';
 
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 import '../controllers/detail_controller.dart';
 
 class DetailView extends GetView<DetailController> {
-  final homeController = Get.find<HomeController>();
-
   @override
   Widget build(BuildContext context) {
-    systemBarColor(statusBarColor: defaultWhite, navBarColor: defaultWhite);
+    controller.setSystemBar();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: defaultWhite,
+        backgroundColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite,
         title: Text(
           'Detail',
-          style: title.copyWith(color: green),
+          style:
+              Get.textTheme.headlineLarge!.copyWith(color: AppColorTheme.green),
         ),
-        iconTheme: IconThemeData(color: green),
+        iconTheme: IconThemeData(color: AppColorTheme.green),
         titleSpacing: 0,
         elevation: 0.2,
         actions: [
@@ -31,7 +32,7 @@ class DetailView extends GetView<DetailController> {
             child: GestureDetector(
               child: Icon(
                 Icons.shopping_cart_rounded,
-                color: green,
+                color: AppColorTheme.green,
               ),
               onTap: () => Get.toNamed(Routes.CART),
             ),
@@ -74,21 +75,21 @@ class DetailView extends GetView<DetailController> {
                         children: [
                           Text(
                             'Broccoli Super Umami Biggest Broccoli in the World',
-                            style: title,
+                            style: Get.textTheme.headlineLarge,
                           ),
                           SizedBox(
                             height: 4,
                           ),
                           Text(
                             '1000 g',
-                            style: normalDark,
+                            style: Get.textTheme.headline1,
                           ),
                           SizedBox(
                             height: 4,
                           ),
                           Text(
                             'Rp 8.000',
-                            style: title,
+                            style: Get.textTheme.headlineLarge,
                           ),
                         ],
                       ),
@@ -97,7 +98,8 @@ class DetailView extends GetView<DetailController> {
                       children: [
                         Text(
                           'Stock: 93',
-                          style: normalDark.copyWith(color: green),
+                          style: Get.textTheme.headline1!
+                              .copyWith(color: AppColorTheme.green),
                         ),
                         SizedBox(
                           height: 4,
@@ -111,7 +113,7 @@ class DetailView extends GetView<DetailController> {
                                 child: InkWell(
                                   child: Icon(
                                     Icons.remove_circle_outline_rounded,
-                                    color: green,
+                                    color: AppColorTheme.green,
                                   ),
                                   onTap: () {},
                                 ),
@@ -122,7 +124,7 @@ class DetailView extends GetView<DetailController> {
                             ),
                             Text(
                               '13',
-                              style: title,
+                              style: Get.textTheme.headlineLarge,
                             ),
                             SizedBox(
                               width: 8,
@@ -134,7 +136,7 @@ class DetailView extends GetView<DetailController> {
                                 child: InkWell(
                                   child: Icon(
                                     Icons.add_circle_outline_rounded,
-                                    color: green,
+                                    color: AppColorTheme.green,
                                   ),
                                   onTap: () {},
                                 ),
@@ -154,7 +156,7 @@ class DetailView extends GetView<DetailController> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
                   lorem(),
-                  style: normalDark,
+                  style: Get.textTheme.headline1,
                 ),
               ),
               SizedBox(
@@ -167,18 +169,21 @@ class DetailView extends GetView<DetailController> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               width: Get.width,
-              color: defaultWhite,
+              color: Get.isDarkMode
+                  ? AppColorTheme.defaultBlack
+                  : AppColorTheme.defaultWhite,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: green,
+                    backgroundColor: AppColorTheme.green,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)))),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Add To Cart',
-                    style: title.copyWith(color: defaultWhite),
+                    style: Get.textTheme.headlineLarge!
+                        .copyWith(color: defaultWhite),
                   ),
                 ),
               ),
@@ -207,9 +212,10 @@ class DetailImage extends StatelessWidget {
         backgroundColor: defaultWhite,
         title: Text(
           imageTitle,
-          style: title.copyWith(color: green),
+          style:
+              Get.textTheme.headlineLarge!.copyWith(color: AppColorTheme.green),
         ),
-        iconTheme: IconThemeData(color: green),
+        iconTheme: IconThemeData(color: AppColorTheme.green),
         titleSpacing: 0,
         elevation: 0.2,
       ),

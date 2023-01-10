@@ -7,19 +7,19 @@ import 'package:segarbox_flutter/theme/text_theme.dart';
 abstract class AppTheme {
   static ThemeData light = ThemeData(
     brightness: Brightness.light,
-    cardColor: AppColorTheme.defaultWhite,
+    cardColor: AppColorTheme.white,
     textTheme: GoogleFonts.poppinsTextTheme(AppTextTheme.light),
   );
 
   static ThemeData dark = ThemeData(
     brightness: Brightness.dark,
-    cardColor: Colors.grey,
+    cardColor: Colors.grey[800],
     textTheme: GoogleFonts.poppinsTextTheme(AppTextTheme.dark),
   );
 
   static void systemBarColor({
     Color statusBarColor = Colors.transparent,
-    Color navBarColor = AppColorTheme.defaultWhite,
+    Color navBarColor = Colors.transparent,
   }) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(

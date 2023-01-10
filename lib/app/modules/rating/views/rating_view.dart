@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 import '../controllers/rating_controller.dart';
@@ -9,24 +10,26 @@ import '../controllers/rating_controller.dart';
 class RatingView extends GetView<RatingController> {
   @override
   Widget build(BuildContext context) {
-    systemBarColor(statusBarColor: defaultWhite);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: defaultWhite,
+        backgroundColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite,
         title: Text(
           'Rating',
-          style: title.copyWith(color: green),
+          style:
+              Get.textTheme.headlineLarge!.copyWith(color: AppColorTheme.green),
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 24),
             child: Icon(
               Icons.shopping_cart_rounded,
-              color: green,
+              color: AppColorTheme.green,
             ),
           ),
         ],
-        iconTheme: IconThemeData(color: green),
+        iconTheme: IconThemeData(color: AppColorTheme.green),
         titleSpacing: 0,
         elevation: 0.2,
       ),
@@ -59,14 +62,15 @@ class RatingView extends GetView<RatingController> {
                         children: [
                           Text(
                             'Broccoli',
-                            style: normalBold,
+                            style: Get.textTheme.headline1!
+                                .copyWith(fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 2,
                           ),
                           Text(
                             '18 Jun 2022',
-                            style: normalDark,
+                            style: Get.textTheme.headline1,
                           ),
                           SizedBox(
                             height: 2,
@@ -76,6 +80,7 @@ class RatingView extends GetView<RatingController> {
                               Icons.star_rounded,
                               color: Colors.amber,
                             ),
+                            itemSize: 28,
                             itemCount: 5,
                             initialRating: 5,
                             minRating: 0,

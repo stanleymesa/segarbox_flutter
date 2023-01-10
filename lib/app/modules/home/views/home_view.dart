@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/views/profile_view.dart';
 import 'package:segarbox_flutter/app/modules/home/views/transactions_view.dart';
 import 'package:segarbox_flutter/app/routes/app_pages.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 import 'package:shimmer/shimmer.dart';
@@ -43,7 +44,7 @@ class HomeView extends GetView<HomeController> {
           ],
           selectedLabelStyle: Get.textTheme.bodyText1,
           unselectedLabelStyle: Get.textTheme.bodyText1,
-          selectedItemColor: green,
+          selectedItemColor: AppColorTheme.green,
           currentIndex: controller.currentNavPage.value,
           onTap: (index) async {
             if (index != 0) {
@@ -67,13 +68,6 @@ class HomePage extends StatelessWidget {
   }) : super(key: key);
 
   final HomeController controller;
-
-  void resetHomeAppBar() {
-    controller.ratio.value = 0;
-    systemBarColor(
-        statusBarColor: (controller.ratio.value <= 0.7) ? green : defaultWhite,
-        navBarColor: defaultWhite);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +140,7 @@ class GridView1 extends StatelessWidget {
         itemBuilder: (context, index) => Stack(
           children: [
             Card(
-              color: Get.isDarkMode ? Colors.grey : Colors.white,
+              color: Get.theme.cardColor,
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -215,7 +209,7 @@ class GridView1 extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    splashColor: green.withOpacity(0.2),
+                    splashColor: AppColorTheme.green.withOpacity(0.2),
                     onTap: () => Get.toNamed(Routes.DETAIL)!
                         .then((_) async => controller.setSystemBar()),
                   ),
@@ -260,7 +254,7 @@ class AllProductsTitle extends StatelessWidget {
                 ),
                 Icon(
                   Icons.double_arrow_rounded,
-                  color: green,
+                  color: AppColorTheme.green,
                   size: 20,
                 ),
               ],
@@ -293,7 +287,7 @@ class HorizontalListView1 extends StatelessWidget {
                 ? Stack(
                     children: [
                       Card(
-                        color: Colors.white,
+                        color: Get.theme.cardColor,
                         elevation: 8,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -367,7 +361,7 @@ class HorizontalListView1 extends StatelessWidget {
                           color: Colors.transparent,
                           child: InkWell(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
-                            splashColor: green.withOpacity(0.2),
+                            splashColor: AppColorTheme.green.withOpacity(0.2),
                             onTap: () => Get.toNamed(Routes.DETAIL)!
                                 .then((value) => controller.setSystemBar()),
                           ),
@@ -385,7 +379,7 @@ class HorizontalListView1 extends StatelessWidget {
                       ),
                       Icon(
                         Icons.double_arrow_rounded,
-                        color: green,
+                        color: AppColorTheme.green,
                         size: 20,
                       )
                     ],
@@ -442,11 +436,11 @@ class MainChips extends StatelessWidget {
             () => Padding(
               padding: const EdgeInsets.only(right: 8),
               child: ChoiceChip(
-                selectedColor: green.withOpacity(0.4),
+                selectedColor: AppColorTheme.green.withOpacity(0.4),
                 elevation: 2,
                 label: Text(
                   controller.chips[index],
-                  style: normalDark.copyWith(fontSize: 12),
+                  style: Get.textTheme.bodyText1,
                 ),
                 selected: (controller.chipsIndex.value == index) ? true : false,
                 onSelected: (isSelected) {
@@ -483,8 +477,8 @@ class CarouselIndicator extends StatelessWidget {
             height: 8,
             decoration: BoxDecoration(
               color: (controller.carouselIndex.value == index)
-                  ? green
-                  : green.withOpacity(0.4),
+                  ? AppColorTheme.green
+                  : Colors.grey,
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
           ),
@@ -539,37 +533,41 @@ class MainAppBar extends StatelessWidget {
       () => Container(
         height: appBarHeight,
         width: Get.width,
-        color: defaultWhite.withOpacity(
-            (controller.ratio.value <= 1.0) ? controller.ratio.value : 1.0),
+        color: Get.isDarkMode
+            ? AppColorTheme.defaultBlack.withOpacity(
+                (controller.ratio.value <= 1.0) ? controller.ratio.value : 1.0)
+            : AppColorTheme.defaultWhite.withOpacity(
+                (controller.ratio.value <= 1.0) ? controller.ratio.value : 1.0),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: Row(
             children: [
               Expanded(
                 child: TextField(
-                  cursorColor:
-                      (controller.ratio.value <= 0.5) ? defaultWhite : green,
+                  cursorColor: (controller.ratio.value <= 0.5)
+                      ? defaultWhite
+                      : AppColorTheme.green,
                   style: (controller.ratio.value <= 0.5)
                       ? normalLight
-                      : normalDark.copyWith(color: green),
+                      : normalDark.copyWith(color: AppColorTheme.green),
                   decoration: InputDecoration(
                     hintText: 'Search',
                     hintStyle: (controller.ratio.value <= 0.5)
                         ? normalLight
-                        : normalDark.copyWith(color: green),
+                        : normalDark.copyWith(color: AppColorTheme.green),
                     prefixIcon: Icon(
                       Icons.search,
                       size: 18,
                       color: (controller.ratio.value <= 0.5)
                           ? defaultWhite
-                          : green,
+                          : AppColorTheme.green,
                     ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 0),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                           color: (controller.ratio.value <= 0.5)
                               ? defaultWhite
-                              : green),
+                              : AppColorTheme.green),
                       borderRadius: BorderRadius.all(
                         Radius.circular(8),
                       ),
@@ -578,7 +576,7 @@ class MainAppBar extends StatelessWidget {
                       borderSide: BorderSide(
                           color: (controller.ratio.value <= 0.5)
                               ? defaultWhite
-                              : green),
+                              : AppColorTheme.green),
                       borderRadius: BorderRadius.all(
                         Radius.circular(8),
                       ),
@@ -592,7 +590,9 @@ class MainAppBar extends StatelessWidget {
               GestureDetector(
                 child: Icon(
                   Icons.shopping_cart_rounded,
-                  color: (controller.ratio.value <= 0.5) ? defaultWhite : green,
+                  color: (controller.ratio.value <= 0.5)
+                      ? defaultWhite
+                      : AppColorTheme.green,
                 ),
                 onTap: () => Get.toNamed(Routes.CART)!
                     .then((value) => controller.setSystemBar()),
@@ -618,7 +618,7 @@ class Header extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           decoration: BoxDecoration(
-            color: green,
+            color: AppColorTheme.green,
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(24),
                 bottomRight: Radius.circular(24)),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:segarbox_flutter/app/modules/home/controllers/transactions_controller.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 
 class TransactionsPage extends GetView<TransactionsController> {
@@ -14,7 +15,7 @@ class TransactionsPage extends GetView<TransactionsController> {
 
   @override
   Widget build(BuildContext context) {
-    systemBarColor(statusBarColor: defaultWhite, navBarColor: defaultWhite);
+    controller.setSystemBar();
     return DefaultTabController(
       length: 2,
       child: WillPopScope(
@@ -29,25 +30,31 @@ class TransactionsPage extends GetView<TransactionsController> {
               child: AppBar(
                 title: Text(
                   'Transactions',
-                  style: title.copyWith(color: green),
+                  style: Get.textTheme.headlineLarge!
+                      .copyWith(color: AppColorTheme.green),
                 ),
-                backgroundColor: defaultWhite,
+                backgroundColor: Get.isDarkMode
+                    ? AppColorTheme.defaultBlack
+                    : AppColorTheme.defaultWhite,
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(right: 24),
                     child: Icon(
                       Icons.shopping_cart_rounded,
-                      color: green,
+                      color: AppColorTheme.green,
                     ),
                   )
                 ],
                 titleSpacing: 24,
                 bottom: TabBar(
-                  unselectedLabelColor: Colors.grey,
-                  unselectedLabelStyle: normalDark.copyWith(fontSize: 16),
-                  labelColor: green,
-                  labelStyle: normalDark.copyWith(fontSize: 16),
-                  indicatorColor: green,
+                  unselectedLabelColor: Get.isDarkMode
+                      ? AppColorTheme.defaultWhite
+                      : AppColorTheme.defaultBlack,
+                  unselectedLabelStyle: Get.textTheme.headline1,
+                  labelColor: AppColorTheme.green,
+                  labelStyle: Get.textTheme.headlineLarge!
+                      .copyWith(fontWeight: FontWeight.normal),
+                  indicatorColor: AppColorTheme.green,
                   tabs: [
                     Tab(
                       child: Text(
@@ -116,21 +123,22 @@ class History extends StatelessWidget {
                   children: [
                     Text(
                       'Broccoli',
-                      style: normalBold,
+                      style: Get.textTheme.headline1!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 4,
                     ),
                     Text(
                       '18 Jun 2022',
-                      style: normalDark,
+                      style: Get.textTheme.headline1,
                     ),
                     SizedBox(
                       height: 4,
                     ),
                     Text(
                       '2 Items',
-                      style: normalDark,
+                      style: Get.textTheme.headline1,
                     ),
                   ],
                 )
@@ -153,14 +161,15 @@ class History extends StatelessWidget {
                   children: [
                     Text(
                       'Grand Total',
-                      style: normalDark,
+                      style: Get.textTheme.headline1,
                     ),
                     SizedBox(
                       height: 4,
                     ),
                     Text(
                       'Rp 120.000',
-                      style: normalBold,
+                      style: Get.textTheme.headline1!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -215,21 +224,22 @@ class InProgress extends StatelessWidget {
                   children: [
                     Text(
                       'Broccoli',
-                      style: normalBold,
+                      style: Get.textTheme.headline1!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 4,
                     ),
                     Text(
                       '18 Jun 2022',
-                      style: normalDark,
+                      style: Get.textTheme.headline1,
                     ),
                     SizedBox(
                       height: 4,
                     ),
                     Text(
                       '2 Items',
-                      style: normalDark,
+                      style: Get.textTheme.headline1,
                     ),
                   ],
                 )
@@ -246,7 +256,7 @@ class InProgress extends StatelessWidget {
             ),
             Text(
               '+ 2 more products',
-              style: normalDark,
+              style: Get.textTheme.headline1,
             ),
             SizedBox(
               height: 8,
@@ -259,14 +269,15 @@ class InProgress extends StatelessWidget {
                   children: [
                     Text(
                       'Grand Total',
-                      style: normalDark,
+                      style: Get.textTheme.headline1,
                     ),
                     SizedBox(
                       height: 4,
                     ),
                     Text(
                       'Rp 120.000',
-                      style: normalBold,
+                      style: Get.textTheme.headline1!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -274,7 +285,7 @@ class InProgress extends StatelessWidget {
                   onPressed: () {},
                   child: Text('Check Status'),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: green,
+                      backgroundColor: AppColorTheme.green,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8)))),
                 )

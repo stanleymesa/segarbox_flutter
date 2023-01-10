@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segarbox_flutter/app/data/models/user.dart';
 import 'package:segarbox_flutter/app/modules/home/providers/home_provider.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 import 'package:segarbox_flutter/theme/theme.dart';
 import 'package:segarbox_flutter/utils/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,15 +15,21 @@ class HomeController extends GetxController with StateMixin<UserResponse> {
   final ratio = 0.0.obs;
   void setSystemBar() {
     systemBarColor(
-        statusBarColor: (ratio.value <= 0.7) ? green : defaultWhite,
-        navBarColor: defaultWhite);
+        statusBarColor: Get.isDarkMode
+            ? (ratio.value <= 0.7)
+                ? AppColorTheme.green
+                : AppColorTheme.defaultBlack
+            : (ratio.value <= 0.7)
+                ? AppColorTheme.green
+                : AppColorTheme.defaultWhite,
+        navBarColor: Get.isDarkMode
+            ? AppColorTheme.defaultBlack
+            : AppColorTheme.defaultWhite);
   }
 
   void resetHomeAppBar() {
     ratio.value = 0;
-    systemBarColor(
-        statusBarColor: (ratio.value <= 0.7) ? green : defaultWhite,
-        navBarColor: defaultWhite);
+    setSystemBar();
   }
 
   // Carousel

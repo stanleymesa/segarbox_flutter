@@ -42,6 +42,7 @@ flutter:
   assets:
     - assets/lottie/
     - assets/image/
+    - assets/maps/
 
 
 
