@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:segarbox_flutter/theme/theme.dart';
+import 'package:segarbox_flutter/theme/color_theme.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -25,16 +25,20 @@ class LoginView extends GetView<LoginController> {
                   SizedBox(
                     height: 50,
                     child: AppBar(
-                      backgroundColor: defaultWhite,
+                      backgroundColor: Get.isDarkMode
+                          ? AppColorTheme.defaultBlack
+                          : AppColorTheme.defaultWhite,
                       elevation: 2,
                       automaticallyImplyLeading: false,
                       bottom: TabBar(
-                        unselectedLabelColor: Colors.grey,
-                        labelColor: green,
-                        indicatorColor: green,
-                        labelStyle: title,
-                        unselectedLabelStyle:
-                            title.copyWith(fontWeight: FontWeight.normal),
+                        unselectedLabelColor: Get.isDarkMode
+                            ? AppColorTheme.defaultWhite
+                            : AppColorTheme.defaultBlack,
+                        unselectedLabelStyle: Get.textTheme.headline1,
+                        labelColor: AppColorTheme.green,
+                        labelStyle: Get.textTheme.headlineLarge!
+                            .copyWith(fontWeight: FontWeight.normal),
+                        indicatorColor: AppColorTheme.green,
                         tabs: [
                           Tab(
                             text: 'Login',
@@ -62,7 +66,9 @@ class LoginView extends GetView<LoginController> {
                   width: Get.width,
                   height: 16,
                   decoration: BoxDecoration(
-                      color: defaultWhite,
+                      color: Get.isDarkMode
+                          ? AppColorTheme.defaultBlack
+                          : AppColorTheme.defaultWhite,
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(16))),
                 ),
@@ -86,92 +92,122 @@ class SignUpTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-        children: [
-          MyTextfield(
-            label: 'Username',
-            icon: Icon(
-              Icons.person_pin_circle_rounded,
-              color: (controller.isUsernameFocus.value) ? green : black,
-              size: 18,
+      () => GestureDetector(
+        onTap: () {
+          controller.usernameFocus.unfocus();
+          controller.emailSignUpFocus.unfocus();
+          controller.phoneFocus.unfocus();
+          controller.passwordSignUpFocus.unfocus();
+          controller.conPasswordSignUpFocus.unfocus();
+        },
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          children: [
+            MyTextfield(
+              label: 'Username',
+              icon: Icon(
+                Icons.person_pin_circle_rounded,
+                color: (controller.isUsernameFocus.value)
+                    ? Get.isDarkMode
+                        ? AppColorTheme.defaultWhite
+                        : AppColorTheme.green
+                    : Colors.grey,
+                size: 18,
+              ),
+              focus: controller.usernameFocus,
+              textEditingController: controller.usernameTextEditingController,
             ),
-            focus: controller.usernameFocus,
-            textEditingController: controller.usernameTextEditingController,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          MyTextfield(
-            label: 'Email',
-            icon: Icon(
-              Icons.email_rounded,
-              color: (controller.isEmailSignUpFocus.value) ? green : black,
-              size: 18,
+            SizedBox(
+              height: 16,
             ),
-            focus: controller.emailSignUpFocus,
-            textEditingController: controller.emailSignUpTextEditingController,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          MyTextfield(
-            label: 'Phone Number',
-            icon: Icon(
-              Icons.phone_rounded,
-              color: (controller.isPhoneFocus.value) ? green : black,
-              size: 18,
+            MyTextfield(
+              label: 'Email',
+              icon: Icon(
+                Icons.email_rounded,
+                color: (controller.isEmailSignUpFocus.value)
+                    ? Get.isDarkMode
+                        ? AppColorTheme.defaultWhite
+                        : AppColorTheme.green
+                    : Colors.grey,
+                size: 18,
+              ),
+              focus: controller.emailSignUpFocus,
+              textEditingController:
+                  controller.emailSignUpTextEditingController,
             ),
-            focus: controller.phoneFocus,
-            textEditingController: controller.phoneTextEditingController,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          MyTextfield(
-            label: 'Password',
-            icon: Icon(
-              Icons.lock_rounded,
-              color: (controller.isPasswordSignUpFocus.value) ? green : black,
-              size: 18,
+            SizedBox(
+              height: 16,
             ),
-            focus: controller.passwordSignUpFocus,
-            textEditingController:
-                controller.passwordSignUpTextEditingController,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          MyTextfield(
-            label: 'Password Confirmation',
-            icon: Icon(
-              Icons.lock_rounded,
-              color:
-                  (controller.isConPasswordSignUpFocus.value) ? green : black,
-              size: 18,
+            MyTextfield(
+              label: 'Phone Number',
+              icon: Icon(
+                Icons.phone_rounded,
+                color: (controller.isPhoneFocus.value)
+                    ? Get.isDarkMode
+                        ? AppColorTheme.defaultWhite
+                        : AppColorTheme.green
+                    : Colors.grey,
+                size: 18,
+              ),
+              focus: controller.phoneFocus,
+              textEditingController: controller.phoneTextEditingController,
             ),
-            focus: controller.conPasswordSignUpFocus,
-            textEditingController:
-                controller.conPasswordSignUpTextEditingController,
-          ),
-          SizedBox(
-            height: 48,
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              final token = await controller.getToken();
-              Get.snackbar('TOKEN', token);
-            },
-            child: Text(
-              'Sign Up',
-              style: title.copyWith(color: defaultWhite),
+            SizedBox(
+              height: 16,
             ),
-            style: ElevatedButton.styleFrom(
-                backgroundColor: green,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8)))),
-          )
-        ],
+            MyTextfield(
+              label: 'Password',
+              icon: Icon(
+                Icons.lock_rounded,
+                color: (controller.isPasswordSignUpFocus.value)
+                    ? Get.isDarkMode
+                        ? AppColorTheme.defaultWhite
+                        : AppColorTheme.green
+                    : Colors.grey,
+                size: 18,
+              ),
+              focus: controller.passwordSignUpFocus,
+              textEditingController:
+                  controller.passwordSignUpTextEditingController,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            MyTextfield(
+              label: 'Password Confirmation',
+              icon: Icon(
+                Icons.lock_rounded,
+                color: (controller.isConPasswordSignUpFocus.value)
+                    ? Get.isDarkMode
+                        ? AppColorTheme.defaultWhite
+                        : AppColorTheme.green
+                    : Colors.grey,
+                size: 18,
+              ),
+              focus: controller.conPasswordSignUpFocus,
+              textEditingController:
+                  controller.conPasswordSignUpTextEditingController,
+            ),
+            SizedBox(
+              height: 48,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final token = await controller.getToken();
+                Get.snackbar('TOKEN', token);
+              },
+              child: Text(
+                'Sign Up',
+                style: Get.textTheme.headlineLarge!
+                    .copyWith(color: AppColorTheme.defaultWhite),
+              ),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColorTheme.green,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)))),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -200,7 +236,11 @@ class LoginTab extends StatelessWidget {
               label: 'Email',
               icon: Icon(
                 Icons.email_rounded,
-                color: (controller.isEmailFocus.value) ? green : black,
+                color: (controller.isEmailFocus.value)
+                    ? Get.isDarkMode
+                        ? AppColorTheme.defaultWhite
+                        : AppColorTheme.green
+                    : Colors.grey,
                 size: 18,
               ),
               focus: controller.emailFocus,
@@ -213,7 +253,11 @@ class LoginTab extends StatelessWidget {
               label: 'Password',
               icon: Icon(
                 Icons.password_rounded,
-                color: (controller.isPasswordFocus.value) ? green : black,
+                color: (controller.isPasswordFocus.value)
+                    ? Get.isDarkMode
+                        ? AppColorTheme.defaultWhite
+                        : AppColorTheme.green
+                    : Colors.grey,
                 size: 18,
               ),
               focus: controller.passwordFocus,
@@ -229,10 +273,11 @@ class LoginTab extends StatelessWidget {
               },
               child: Text(
                 'Login',
-                style: title.copyWith(color: defaultWhite),
+                style: Get.textTheme.headlineLarge!
+                    .copyWith(color: AppColorTheme.defaultWhite),
               ),
               style: ElevatedButton.styleFrom(
-                  backgroundColor: green,
+                  backgroundColor: AppColorTheme.green,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)))),
             )
@@ -260,23 +305,30 @@ class MyTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      cursorColor: green,
-      style: normalDark.copyWith(color: green),
+      cursorColor:
+          Get.isDarkMode ? AppColorTheme.defaultWhite : AppColorTheme.green,
+      style: Get.textTheme.headline1!.copyWith(
+          color: Get.isDarkMode
+              ? AppColorTheme.defaultWhite
+              : AppColorTheme.green),
       focusNode: focus,
       controller: textEditingController,
       decoration: InputDecoration(
         hintText: label,
-        hintStyle: normalDark,
+        hintStyle: Get.textTheme.headline1!.copyWith(color: Colors.grey),
         prefixIcon: icon,
         contentPadding: EdgeInsets.symmetric(horizontal: 0),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: green),
+          borderSide: BorderSide(
+              color: Get.isDarkMode
+                  ? AppColorTheme.defaultWhite
+                  : AppColorTheme.green),
           borderRadius: BorderRadius.all(
             Radius.circular(8),
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: black),
+          borderSide: BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.all(
             Radius.circular(8),
           ),
